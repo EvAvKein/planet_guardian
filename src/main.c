@@ -112,11 +112,26 @@ int main(void)
     float spawnDelay = 3.0f;  // Delay in seconds before spawning new asteroid
 	float totalTime = 0.0f;  // Total elapsed time
 
+	Image image = LoadImage("assets/graphics/shield.png");
+	Texture2D rotatingImage = LoadTextureFromImage(image); // Replace with your image
+    Vector2 planetPosition = { screenWidth / 2.0f, screenHeight / 2.0f }; // Position of the planet
+    float rotationRadius = 150.0f; // Radius of the circular orbit around the planet
+
+    // Variable to control the rotation angle (in radians)
+    float angle = 0.0f;
+
 	while (!WindowShouldClose())
 	{
+		angle += 0.01f; // Adjust the speed of rotation here
 
 		float deltaTime = GetFrameTime();  // Get time elapsed since last frame
 		totalTime += deltaTime;
+
+		 // Calculate the new position of the rotating image based on the angle
+		 float x = planetPosition.x + rotationRadius * cos(angle);
+		 float y = planetPosition.y + rotationRadius * sin(angle);
+
+
 		BeginDrawing();
 			ClearBackground(RAYWHITE);
 			DrawTextureV(game.planet, planetpos, WHITE);
@@ -129,6 +144,7 @@ int main(void)
 				DrawTextureV(game.asteroid[3], position4, WHITE);
 			if (totalTime > spawnDelay * 4)
 				DrawTextureV(game.asteroid[4], position5, WHITE);
+			DrawTextureEx(rotatingImage, (Vector2){x - rotatingImage.width / 2.0f, y - rotatingImage.height / 2.0f}, angle * 180.0f / PI, 1.0f, WHITE);
 		EndDrawing();
 		position1 = moveTowards(position1, target, speed);
 		if (totalTime > spawnDelay)
