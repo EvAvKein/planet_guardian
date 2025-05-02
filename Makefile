@@ -1,4 +1,4 @@
-NAME := jam
+NAME := planet_guardian
 
 SRC_DIR := src
 SRC_FILES := main.c

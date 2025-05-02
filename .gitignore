@@ -1,1 +1,3 @@
-jam
+planet_guardian
+*.o
+.vscode
