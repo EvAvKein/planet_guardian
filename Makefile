@@ -19,7 +19,6 @@ all: $(NAME)
 %.o: %.c
 	cc $(COMPILE_FLAGS) -c $< -o $@
 
-# $(HEADERS)
 $(NAME): $(LIB_FILES) $(SRC_OBJ)
 	clang $(SRC_OBJ) $(LIB_FILES) $(COMPILE_FLAGS) $(LIBRARY_FLAGS) -o $(NAME)
 
