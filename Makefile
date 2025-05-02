@@ -1,10 +1,9 @@
-NAME := jam
+NAME := planet_guardian
 
 SRC_DIR := src
 SRC_FILES := main.c
 
 INCLUDE_DIR := incl
-# INCLUDE_FILES := 
 
 LIB_FILES := raylib5_6.a
 LIB_INCLUDE_DIR := raylib/src
@@ -14,14 +13,12 @@ LIBRARY_FLAGS := -lm -ldl -lpthread -lGL -lrt -lX11
 DEBUG_FLAGS := -g
 
 SRC_OBJ := $(SRC_FILES:%.c=$(SRC_DIR)/%.o)
-# HEADERS := $(INCLUDE_FILES:%=$(INCLUDE_DIR)/%)
 
 all: $(NAME)
 
 %.o: %.c
 	cc $(COMPILE_FLAGS) -c $< -o $@
 
-# $(HEADERS)
 $(NAME): $(LIB_FILES) $(SRC_OBJ)
 	clang $(SRC_OBJ) $(LIB_FILES) $(COMPILE_FLAGS) $(LIBRARY_FLAGS) -o $(NAME)
 
