@@ -8,9 +8,10 @@
 
 typedef struct sprite
 {
-    Vector2 pos = {0, 0};
-    Texture2D texture;
-} sprite_t
+    Vector2 pos;
+    Texture2D *texture;
+    float radius;
+} sprite_t;
 
 typedef struct game
 {

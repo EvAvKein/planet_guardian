@@ -81,7 +81,6 @@ Vector2 generateAsteroidPos()
     return position;
 }
 
-
 int main(void)
 {
 	srand(time(NULL));
@@ -110,22 +109,36 @@ int main(void)
 	Vector2 position4 = generateAsteroidPos();
 	Vector2 position5 = generateAsteroidPos();
 
+    float spawnDelay = 3.0f;  // Delay in seconds before spawning new asteroid
+	float totalTime = 0.0f;  // Total elapsed time
+
 	while (!WindowShouldClose())
 	{
+
+		float deltaTime = GetFrameTime();  // Get time elapsed since last frame
+		totalTime += deltaTime;
 		BeginDrawing();
 			ClearBackground(RAYWHITE);
 			DrawTextureV(game.planet, planetpos, WHITE);
 			DrawTextureV(game.asteroid[0], position1, WHITE);
-			DrawTextureV(game.asteroid[1], position2, WHITE);
-			DrawTextureV(game.asteroid[2], position3, WHITE);
-			DrawTextureV(game.asteroid[3], position4, WHITE);
-			DrawTextureV(game.asteroid[4], position5, WHITE);
+			if (totalTime > spawnDelay)
+				DrawTextureV(game.asteroid[1], position2, WHITE);
+			if (totalTime > spawnDelay * 2)
+				DrawTextureV(game.asteroid[2], position3, WHITE);
+			if (totalTime > spawnDelay * 3)
+				DrawTextureV(game.asteroid[3], position4, WHITE);
+			if (totalTime > spawnDelay * 4)
+				DrawTextureV(game.asteroid[4], position5, WHITE);
 		EndDrawing();
 		position1 = moveTowards(position1, target, speed);
-		position2 = moveTowards(position2, target, speed);
-		position3 = moveTowards(position3, target, speed);
-		position4 = moveTowards(position4, target, speed);
-		position5 = moveTowards(position5, target, speed);
+		if (totalTime > spawnDelay)
+			position2 = moveTowards(position2, target, speed);
+		if (totalTime > spawnDelay * 2)
+			position3 = moveTowards(position3, target, speed);
+		if (totalTime > spawnDelay * 3)
+			position4 = moveTowards(position4, target, speed);
+		if (totalTime > spawnDelay * 4)
+			position5 = moveTowards(position5, target, speed);
 	}
 
 	textureUnload();
