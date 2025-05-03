@@ -17,12 +17,31 @@ typedef struct sprite
 	float       speed;
 } sprite_t;
 
+typedef struct shadow {
+    Texture2D   texture;
+    int         rotation;
+    int         speed;
+} shadow_t;
+
+typedef struct cold {
+    Texture2D   texture;
+    unsigned char value;
+    float elapsed;
+    float interval;
+    // float withdrawal_limit;
+    // float withdrawal_current;
+} cold_t;
+
 typedef struct game
 {
     sprite_t   planet;
     sprite_t   asteroid[5];
+    cold_t     cold;
+    shadow_t   shadow;
 } game_t;
 
 extern game_t game;
+
+void	update_planet_condition(float delta_time);
 
 #endif

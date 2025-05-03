@@ -1,7 +1,8 @@
 NAME := planet_guardian
 
 SRC_DIR := src
-SRC_FILES := main.c
+SRC_FILES := main.c \
+             planet_condition.c
 
 INCLUDE_DIR := incl
 
