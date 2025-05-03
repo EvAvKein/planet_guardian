@@ -7,7 +7,6 @@ game_t game;
 void textureLoader()
 {
 	Image image = LoadImage("assets/graphics/earth_normal.png");
-	Image image = LoadImage("assets/graphics/icon.png");
 	game.font = LoadFontEx("assets/fonts/PIXY.ttf", 32, 0, 250);
 	Texture2D texture = LoadTextureFromImage(image);
 	game.planet.texture = texture;
