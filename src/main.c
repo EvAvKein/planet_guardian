@@ -152,7 +152,8 @@ int main(void)
 			CheckCollisionCircles(game.asteroid[i].center_pos, game.asteroid[i].radius, shieldCircle5Center, shieldSegmentRadius)||
 			CheckCollisionCircles(game.asteroid[i].center_pos, game.asteroid[i].radius, shieldCircle6Center, shieldSegmentRadius))
 			{
-				 game.asteroid[i] = initialize_asteroid(game.asteroid[i]);
+				
+				game.asteroid[i] = initialize_asteroid(game.asteroid[i]);
 			}
 			i++;
 		}
