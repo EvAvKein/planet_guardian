@@ -1,6 +1,9 @@
 
 #include "planet_guardian.h"
 
+
+
+
 void draw_shield(float angle)
 {
     float orbitRadius = game.planet.radius + 50.0f;

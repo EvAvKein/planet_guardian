@@ -74,6 +74,8 @@ void textureUnload()
 	UnloadTexture(game.shield.texture);
 }
 
+
+
 int main(void)
 {
 	srand(time(NULL));
@@ -100,7 +102,6 @@ int main(void)
 	while (!WindowShouldClose())
 	{
 
-
         // --- Calculate Shield Collision Circles ---
         float orbitRadius = game.planet.radius + 50.0f;
         Vector2 planetCenter = game.planet.center_pos;
@@ -125,7 +126,7 @@ int main(void)
 
 		if (IsKeyPressed(KEY_SPACE))
         		shieldDirection = -shieldDirection;
-        	float deltaTime = GetFrameTime();
+        float deltaTime = GetFrameTime();
 		shieldAngle += deltaTime * 3.0f * shieldDirection; // Get time elapsed since last frame
 		// if (IsKeyDown(KEY_LEFT))
 		// 	shieldAngle -= deltaTime * 3.0f;  // Get time elapsed since last frame
@@ -173,7 +174,7 @@ int main(void)
 				0,
 				WHITE);
 
-			update_planet_condition(deltaTime);
+			update_planet_condition(deltaTime, shieldAngle);
 			DrawTextureV(game.planet.texture, game.planet.pos, WHITE);
 			DrawTextureV(game.cold.texture, game.planet.pos,
 				(Color){.r = 255, .g = 255, .b = 255, .a = game.cold.value});
@@ -187,6 +188,7 @@ int main(void)
 				game.shadow.rotation,
 				(Color){.r = 0, .g = 0, .b = 0, .a = 150});
 			draw_shield(shieldAngle);
+			// printf("%f\n", remainder(shieldAngle, 3.6));
 			//debugging shield
 			// DrawCircleLinesV(shieldCircle1Center, game.shield.texture.width * 0.093f, BLACK);
 			// DrawCircleLinesV(shieldCircle2Center, game.shield.texture.width * 0.093f, BLACK);
