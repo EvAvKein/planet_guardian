@@ -9,7 +9,7 @@ void drawMenu() {
 }
 
 void deathScreen() {
-    printp("YOU LOST", 400, 400, 1.0f, DARKPURPLE);
+    printp("YOU LOST.\n RETRY?", 400, 400, 1.0f, DARKPURPLE);
     if(IsKeyPressed(KEY_SPACE))
         game.state = GAME;
 }
