@@ -7,6 +7,8 @@ game_t game;
 void textureLoader()
 {
 	Image image = LoadImage("assets/graphics/earth_normal.png");
+	Image image = LoadImage("assets/graphics/icon.png");
+	game.font = LoadFontEx("assets/fonts/PIXY.ttf", 32, 0, 250);
 	Texture2D texture = LoadTextureFromImage(image);
 	game.planet.texture = texture;
 	game.planet.radius = texture.height / 2.0f;
@@ -86,7 +88,7 @@ int main(void)
 
 	textureLoader();
 
-	SetTargetFPS(60);    
+	SetTargetFPS(60);
 	game.planet.pos.x = (screenWidth - game.planet.texture.width) / 2.0f;
 	game.planet.pos.y = (screenHeight - game.planet.texture.height) / 2.0f;
 	game.planet.center_pos.x = game.planet.pos.x + game.planet.texture.width / 2.0f;
@@ -173,7 +175,6 @@ int main(void)
 				WHITE);
 
 			update_planet_condition(deltaTime);
-			
 			DrawCircle(game.planet.center_pos.x, game.planet.center_pos.y, game.planet.radius, RED);
 			DrawTextureV(game.planet.texture, game.planet.pos, WHITE);
 			DrawTextureV(game.cold.texture, game.planet.pos,
@@ -196,6 +197,7 @@ int main(void)
 			// DrawCircleLinesV(shieldCircle5Center, game.shield.texture.width * 0.12f, BLACK);
 			// DrawCircleLinesV(shieldCircle6Center, game.shield.texture.width * 0.12f, BLACK);
 			draw_asteroids();
+			printp("HEALTH: 3", 550., 750., 1.0f, RED);
 		EndDrawing();
 	}
 
