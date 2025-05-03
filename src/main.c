@@ -11,30 +11,6 @@ void textureLoader()
 	game.planet.texture = texture;
 	game.planet.radius = texture.height / 2.0f;
 	UnloadImage(image);
-	image = LoadImage("assets/graphics/ROCK.png");
-	Texture2D texture1 = LoadTextureFromImage(image);
-	game.asteroid[0].texture = texture1;
-	UnloadImage(image);
-	image = LoadImage("assets/graphics/ROCK.png");
-	Texture2D texture2 = LoadTextureFromImage(image);
-	game.asteroid[1].texture = texture2;
-	game.asteroid[1].radius = texture2.height / 2.0f;
-	UnloadImage(image);
-	image = LoadImage("assets/graphics/ROCK.png");
-	Texture2D texture3 = LoadTextureFromImage(image);
-	game.asteroid[2].texture = texture3;
-	game.asteroid[2].radius = texture3.height / 2.0f;
-	UnloadImage(image);
-	image = LoadImage("assets/graphics/ROCK.png");
-	Texture2D texture4 = LoadTextureFromImage(image);
-	game.asteroid[3].texture = texture4;
-	game.asteroid[3].radius = texture3.height / 2.0f;
-	UnloadImage(image);
-	image = LoadImage("assets/graphics/ROCK.png");
-	Texture2D texture5 = LoadTextureFromImage(image);
-	game.asteroid[4].texture = texture5;
-	game.asteroid[4].radius = texture4.height / 2.0f;
-	UnloadImage(image);
 	image = LoadImage("assets/graphics/shield.png");
 	Texture2D texture6 = LoadTextureFromImage(image);
 	game.shield.texture = texture6;
@@ -42,12 +18,12 @@ void textureLoader()
 
 // TEST
 	int i = 0;
-	image = LoadImage("assets/graphics/ROCK.png");
+	image = LoadImage("assets/graphics/asteroid2.png");
 	Texture2D asteroid_texture = LoadTextureFromImage(image);
 	while (i < MAX_ASTEROIDS)
 	{
 		game.asteroid[i].texture = asteroid_texture;
-		game.asteroid[i].radius = texture4.height / 2.0f;
+		game.asteroid[i].radius = asteroid_texture.height / 2.0f;
 		i++;
 	}
 	UnloadImage(image);
@@ -127,7 +103,7 @@ int main(void)
 			game.asteroid[i].center_pos.x = game.asteroid[i].pos.x + game.asteroid[i].radius;
 			game.asteroid[i].center_pos.y = game.asteroid[i].pos.y + game.asteroid[i].radius;
 			if (CheckCollisionCircles(game.planet.center_pos, game.planet.radius, game.asteroid[i].center_pos, game.asteroid[i].radius))
-				game.asteroid[i].pos = generateAsteroidPos();
+				game.asteroid[i] = initialize_asteroid(game.asteroid[i]);
 			game.asteroid[i].pos = moveTowardsWithGravity(game.asteroid[i].pos, game.planet.center_pos, game.asteroid[i].speed, game.planet.center_pos);
 
 			if (CheckCollisionCircles(game.asteroid[i].center_pos, game.asteroid[i].radius, shieldCircle1Center, shieldSegmentRadius) ||
