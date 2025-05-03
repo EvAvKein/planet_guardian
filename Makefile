@@ -1,7 +1,8 @@
 NAME := planet_guardian
 
 SRC_DIR := src
-SRC_FILES := main.c movement.c initialize_asteroids.c collision_detection.c draw_sprites.c draw_shield.c
+SRC_FILES := main.c movement.c initialize_asteroids.c collision_detection.c draw_sprites.c draw_shield.c \
+	planet_condition.c text.c
 
 INCLUDE_DIR := incl
 

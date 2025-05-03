@@ -78,5 +78,21 @@
    "src/draw_sprites.o"
   ],
   "file": "src/draw_sprites.c"
+ },
+ {
+  "directory": "/home/anpollan/Projects/planet_guardians",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-Iincl",
+   "-Iraylib/src",
+   "-c",
+   "src/draw_shield.c",
+   "-o",
+   "src/draw_shield.o"
+  ],
+  "file": "src/draw_shield.c"
  }
 ]
