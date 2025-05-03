@@ -137,7 +137,7 @@ int main(void)
 			CheckCollisionCircles(game.asteroid[i].center_pos, game.asteroid[i].radius, shieldCircle5Center, shieldSegmentRadius)||
 			CheckCollisionCircles(game.asteroid[i].center_pos, game.asteroid[i].radius, shieldCircle6Center, shieldSegmentRadius))
 			{
-				 game.asteroid[i].pos = generateAsteroidPos();
+				 game.asteroid[i] = initialize_asteroid(game.asteroid[i]);
 			}
 			i++;
 		}
@@ -150,16 +150,16 @@ int main(void)
 			DrawCircle(game.planet.center_pos.x, game.planet.center_pos.y, game.planet.radius, RED);
 			DrawTextureV(game.planet.texture, game.planet.pos, WHITE);
 			draw_shield(shieldAngle);
-			// shieldSegmentOffset = game.shield.texture.width * 0.4f; debugging
-			// shieldSegmentRadius = game.shield.texture.width * 0.093f;
-			// DrawCircleLinesV(shieldCircle1Center, shieldSegmentRadius, GREEN);
-			// DrawCircleLinesV(shieldCircle2Center, shieldSegmentRadius, GREEN);
-			// shieldSegmentRadius = game.shield.texture.width * 0.15f;
-			// DrawCircleLinesV(shieldCircle3Center, shieldSegmentRadius, GREEN);
-			// DrawCircleLinesV(shieldCircle4Center, shieldSegmentRadius, GREEN);
-			// shieldSegmentRadius = game.shield.texture.width * 0.12f;
-			// DrawCircleLinesV(shieldCircle5Center, shieldSegmentRadius, GREEN);
-			// DrawCircleLinesV(shieldCircle6Center, shieldSegmentRadius, GREEN);
+			shieldSegmentOffset = game.shield.texture.width * 0.4f;
+			shieldSegmentRadius = game.shield.texture.width * 0.093f;
+			DrawCircleLinesV(shieldCircle1Center, shieldSegmentRadius, GREEN);
+			DrawCircleLinesV(shieldCircle2Center, shieldSegmentRadius, GREEN);
+			shieldSegmentRadius = game.shield.texture.width * 0.15f;
+			DrawCircleLinesV(shieldCircle3Center, shieldSegmentRadius, GREEN);
+			DrawCircleLinesV(shieldCircle4Center, shieldSegmentRadius, GREEN);
+			shieldSegmentRadius = game.shield.texture.width * 0.12f;
+			DrawCircleLinesV(shieldCircle5Center, shieldSegmentRadius, GREEN);
+			DrawCircleLinesV(shieldCircle6Center, shieldSegmentRadius, GREEN);
 			draw_asteroids();
 		EndDrawing();
 	}
