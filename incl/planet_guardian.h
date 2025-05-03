@@ -20,6 +20,13 @@
 # define MAX_TEMP 255
 # define MIN_TEMP 0
 
+typedef enum gamestate 
+{
+    START,
+    GAME,
+    END
+} state_t;
+
 typedef struct sprite
 {
     Vector2     pos;
@@ -61,7 +68,10 @@ typedef struct game
     cold_t     cold;
     shadow_t   shadow;
     Texture2D  background;
-    Font      font;
+    Font        font;
+    state_t    state;
+    Texture2D   logo;
+    Texture2D   menu;
 } game_t;
 
 extern game_t game;
