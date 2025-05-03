@@ -42,7 +42,6 @@ int main(void)
 			case END:
 				deathScreen();
 		}
-		
 	}
 
 	textureUnload();
