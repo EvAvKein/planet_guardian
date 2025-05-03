@@ -88,7 +88,6 @@ Vector2 generateAsteroidPos()
     return position;
 }
 
-
 int main(void)
 {
 	srand(time(NULL));
@@ -125,6 +124,9 @@ int main(void)
 	Vector2 asteroid4_center = { position4.x - asteroid_radius, position4.y - asteroid_radius};
 	Vector2 asteroid5_center = { position5.x - asteroid_radius, position5.y - asteroid_radius};
 
+	float spawnDelay = 3.0f;  // Delay in seconds before spawning new asteroid
+	float totalTime = 0.0f;  // Total elapsed time
+
 	while (!WindowShouldClose())
 	{
 		if (CheckCollisionCircles(target, planet_radius, asteroid1_center, asteroid_radius))
@@ -137,21 +139,32 @@ int main(void)
 		    position4 = generateAsteroidPos();
 		if (CheckCollisionCircles(target, planet_radius, asteroid5_center, asteroid_radius))
 		    position5 = generateAsteroidPos();
+
+		float deltaTime = GetFrameTime();  // Get time elapsed since last frame
+		totalTime += deltaTime;
 		BeginDrawing();
 			ClearBackground(RAYWHITE);
 			DrawCircle(target.x, target.y, planet_radius, RED);
 			DrawTextureV(game.planet.texture, planetpos, WHITE);
 			DrawTextureV(game.asteroid[0].texture, position1, WHITE);
-			DrawTextureV(game.asteroid[1].texture, position2, WHITE);
-			DrawTextureV(game.asteroid[2].texture, position3, WHITE);
-			DrawTextureV(game.asteroid[3].texture, position4, WHITE);
-			DrawTextureV(game.asteroid[4].texture, position5, WHITE);
+			if (totalTime > spawnDelay)
+				DrawTextureV(game.asteroid[1].texture, position2, WHITE);
+			if (totalTime > spawnDelay * 2)
+				DrawTextureV(game.asteroid[2].texture, position3, WHITE);
+			if (totalTime > spawnDelay * 3)
+				DrawTextureV(game.asteroid[3].texture, position4, WHITE);
+			if (totalTime > spawnDelay * 4)
+				DrawTextureV(game.asteroid[4].texture, position5, WHITE);
 		EndDrawing();
 		position1 = moveTowards(position1, target, speed);
-		position2 = moveTowards(position2, target, speed);
-		position3 = moveTowards(position3, target, speed);
-		position4 = moveTowards(position4, target, speed);
-		position5 = moveTowards(position5, target, speed);
+		if (totalTime > spawnDelay)
+			position2 = moveTowards(position2, target, speed);
+		if (totalTime > spawnDelay * 2)
+			position3 = moveTowards(position3, target, speed);
+		if (totalTime > spawnDelay * 3)
+			position4 = moveTowards(position4, target, speed);
+		if (totalTime > spawnDelay * 4)
+			position5 = moveTowards(position5, target, speed);
 
 		asteroid1_center.x = position1.x + asteroid_radius;
 		asteroid1_center.y = position1.y + asteroid_radius;
