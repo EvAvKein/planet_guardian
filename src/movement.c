@@ -40,7 +40,6 @@ Vector2 generateRandomDir(Vector2 current)
     };
 
     Vector2 direction = Vector2Subtract(target, current);
-    printf("direction x %f, y %f \n", direction.x, direction.y);
     return direction;
 }
 

@@ -8,10 +8,10 @@
 # include <stdio.h>
 
 # define MAX_ASTEROIDS 10
-# define MAX_ASTEROID_SPEED 10.0f
+# define MAX_ASTEROID_SPEED 5.0f
 # define MIN_ASTEROID_RADIUS 10.0f
 # define MAX_ASTEROID_RADIUS 20.0f
-# define GRAVITYPULL_SCALE 0.000003f
+# define GRAVITYPULL_SCALE 0.000005f
 
 void draw_shield(float angle);
 

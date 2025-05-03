@@ -77,8 +77,8 @@ void textureUnload()
 int main(void)
 {
 	srand(time(NULL));
-	const int   screenWidth = 800;
-    const int   screenHeight = 800;
+	const int   screenWidth = 1000;
+    const int   screenHeight = 1000;
 	InitWindow(screenWidth, screenHeight, "Planet Guardian");
 
 	game.cold.interval = 0.15f;
@@ -174,7 +174,6 @@ int main(void)
 				WHITE);
 
 			update_planet_condition(deltaTime);
-			DrawCircle(game.planet.center_pos.x, game.planet.center_pos.y, game.planet.radius, RED);
 			DrawTextureV(game.planet.texture, game.planet.pos, WHITE);
 			DrawTextureV(game.cold.texture, game.planet.pos,
 				(Color){.r = 255, .g = 255, .b = 255, .a = game.cold.value});
