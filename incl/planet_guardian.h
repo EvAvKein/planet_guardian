@@ -7,10 +7,8 @@
 # include <time.h>
 # include <stdio.h>
 
-# define MAX_ASTEROIDS 5
-# define MAX_ASTEROID_SPEED 10.0f
 # define MAX_ASTEROIDS 100
-# define MAX_ASTEROID_SPEED 5.0f
+# define MAX_ASTEROID_SPEED 10.0f
 # define MIN_ASTEROID_RADIUS 10.0f
 # define MAX_ASTEROID_RADIUS 20.0f
 # define GRAVITYPULL_SCALE 0.00001f
