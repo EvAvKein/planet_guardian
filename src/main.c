@@ -78,6 +78,7 @@ void textureUnload()
 
 int main(void)
 {
+	InitAudioDevice();
 	srand(time(NULL));
 	const int   screenWidth = 1000;
     const int   screenHeight = 1000;
@@ -152,7 +153,7 @@ int main(void)
 			CheckCollisionCircles(game.asteroid[i].center_pos, game.asteroid[i].radius, shieldCircle5Center, shieldSegmentRadius)||
 			CheckCollisionCircles(game.asteroid[i].center_pos, game.asteroid[i].radius, shieldCircle6Center, shieldSegmentRadius))
 			{
-				
+				play_shield_sound();
 				game.asteroid[i] = initialize_asteroid(game.asteroid[i]);
 			}
 			i++;
