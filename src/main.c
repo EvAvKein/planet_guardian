@@ -111,13 +111,13 @@ int main(void)
 		EndDrawing();
 		game.asteroid[0].pos = moveTowardsWithGravity(game.asteroid[0].pos, game.planet.center_pos, game.asteroid[0].speed, game.planet.center_pos);
 		if (totalTime > spawnDelay)
-			game.asteroid[1].pos = moveTowardsWithGravity(game.asteroid[1].pos, game.planet.center_pos, game.asteroid[0].speed, game.planet.center_pos);
+			game.asteroid[1].pos = moveTowardsWithGravity(game.asteroid[1].pos, game.planet.center_pos, game.asteroid[1].speed, game.planet.center_pos);
 		if (totalTime > spawnDelay * 2)
-			game.asteroid[2].pos = moveTowardsWithGravity(game.asteroid[2].pos, game.planet.center_pos, game.asteroid[0].speed, game.planet.center_pos);
+			game.asteroid[2].pos = moveTowardsWithGravity(game.asteroid[2].pos, game.planet.center_pos, game.asteroid[2].speed, game.planet.center_pos);
 		if (totalTime > spawnDelay * 3)
-			game.asteroid[3].pos = moveTowardsWithGravity(game.asteroid[3].pos, game.planet.center_pos, game.asteroid[0].speed, game.planet.center_pos);
+			game.asteroid[3].pos = moveTowardsWithGravity(game.asteroid[3].pos, game.planet.center_pos, game.asteroid[3].speed, game.planet.center_pos);
 		if (totalTime > spawnDelay * 4)
-			game.asteroid[4].pos = moveTowardsWithGravity(game.asteroid[4].pos, game.planet.center_pos, game.asteroid[0].speed, game.planet.center_pos);
+			game.asteroid[4].pos = moveTowardsWithGravity(game.asteroid[4].pos, game.planet.center_pos, game.asteroid[4].speed, game.planet.center_pos);
 
 	}
 
