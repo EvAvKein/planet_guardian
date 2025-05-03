@@ -1,4 +1,5 @@
 #include "planet_guardian.h"
+#include "raylib.h"
 
 game_t game;
 
@@ -6,38 +7,44 @@ void textureLoader()
 {
 	Image image = LoadImage("assets/graphics/icon.png");
 	Texture2D texture = LoadTextureFromImage(image);
-	game.planet = texture;
+	game.planet.texture = texture;
+	game.planet.radius = texture.height;
 	UnloadImage(image);
 	image = LoadImage("assets/graphics/ROCK.png");
 	Texture2D texture1 = LoadTextureFromImage(image);
-	game.asteroid[0] = texture1;
+	game.asteroid[0].texture = texture1;
+	game.asteroid[0].radius = texture1.height;
 	UnloadImage(image);
 	image = LoadImage("assets/graphics/ROCK.png");
 	Texture2D texture2 = LoadTextureFromImage(image);
-	game.asteroid[1] = texture2;
+	game.asteroid[1].texture = texture2;
+	game.asteroid[1].radius = texture2.height;
 	UnloadImage(image);
 	image = LoadImage("assets/graphics/ROCK.png");
 	Texture2D texture3 = LoadTextureFromImage(image);
-	game.asteroid[2] = texture3;
+	game.asteroid[2].texture = texture3;
+	game.asteroid[2].radius = texture3.height;
 	UnloadImage(image);
 	image = LoadImage("assets/graphics/ROCK.png");
 	Texture2D texture4 = LoadTextureFromImage(image);
-	game.asteroid[3] = texture4;
+	game.asteroid[3].texture = texture4;
+	game.asteroid[3].radius = texture3.height;
 	UnloadImage(image);
 	image = LoadImage("assets/graphics/ROCK.png");
 	Texture2D texture5 = LoadTextureFromImage(image);
-	game.asteroid[4] = texture5;
+	game.asteroid[4].texture = texture5;
+	game.asteroid[4].radius = texture4.height;
 	UnloadImage(image);
 }
 
 void textureUnload()
 {
-	UnloadTexture(game.planet);
-	UnloadTexture(game.asteroid[0]);
-	UnloadTexture(game.asteroid[1]);
-	UnloadTexture(game.asteroid[2]);
-	UnloadTexture(game.asteroid[3]);
-	UnloadTexture(game.asteroid[4]);
+	UnloadTexture(game.planet.texture);
+	UnloadTexture(game.asteroid[0].texture);
+	UnloadTexture(game.asteroid[1].texture);
+	UnloadTexture(game.asteroid[2].texture);
+	UnloadTexture(game.asteroid[3].texture);
+	UnloadTexture(game.asteroid[4].texture);
 }
 
 Vector2 moveTowards(Vector2 current, Vector2 target, float speed)
@@ -84,51 +91,70 @@ Vector2 generateAsteroidPos()
 int main(void)
 {
 	srand(time(NULL));
-	const int screenWidth = 800;
-    const int screenHeight = 800;
+	const int   screenWidth = 800;
+        const int   screenHeight = 800;
 	InitWindow(screenWidth, screenHeight, "Jam!");
 
 	textureLoader();
 
 	SetTargetFPS(60);    
-	int x = (screenWidth - game.planet.width) / 2;
-	int y = (screenHeight - game.planet.height) / 2;
-	Vector2 planetpos = {x, y};
+	int x = (screenWidth - game.planet.texture.width) / 2;
+	int y = (screenHeight - game.planet.texture.height) / 2;
+	Vector2	planetpos = {x, y};
+	float	planet_radius = 85.0f;
 	// Aim to the middle of the planet
 	// calculating the target to the middle
 	Vector2 target = 
 	{
-		x + game.planet.width / 2.0f,
-		y + game.planet.height / 2.0f
+		x + game.planet.texture.width / 2.0f,
+		y + game.planet.texture.height / 2.0f
 	};
-	float speed = 0.5f;
+	float speed = 1.5f;
 
+	int	asteroid_radius = 10;
 	Vector2 position1 = generateAsteroidPos();
 	Vector2 position2 = generateAsteroidPos();
 	Vector2 position3 = generateAsteroidPos();
 	Vector2 position4 = generateAsteroidPos();
 	Vector2 position5 = generateAsteroidPos();
 
-    float spawnDelay = 3.0f;  // Delay in seconds before spawning new asteroid
+	Vector2 asteroid1_center = { position1.x - asteroid_radius, position1.y - asteroid_radius};
+	Vector2 asteroid2_center = { position2.x - asteroid_radius, position2.y - asteroid_radius};
+	Vector2 asteroid3_center = { position3.x - asteroid_radius, position3.y - asteroid_radius};
+	Vector2 asteroid4_center = { position4.x - asteroid_radius, position4.y - asteroid_radius};
+	Vector2 asteroid5_center = { position5.x - asteroid_radius, position5.y - asteroid_radius};
+
+	float spawnDelay = 3.0f;  // Delay in seconds before spawning new asteroid
 	float totalTime = 0.0f;  // Total elapsed time
 
 	while (!WindowShouldClose())
 	{
+		if (CheckCollisionCircles(target, planet_radius, asteroid1_center, asteroid_radius))
+		    position1 = generateAsteroidPos();
+		if (CheckCollisionCircles(target, planet_radius, asteroid2_center, asteroid_radius))
+		    position2 = generateAsteroidPos();
+		if (CheckCollisionCircles(target, planet_radius, asteroid3_center, asteroid_radius))
+		    position3 = generateAsteroidPos();
+		if (CheckCollisionCircles(target, planet_radius, asteroid4_center, asteroid_radius))
+		    position4 = generateAsteroidPos();
+		if (CheckCollisionCircles(target, planet_radius, asteroid5_center, asteroid_radius))
+		    position5 = generateAsteroidPos();
 
 		float deltaTime = GetFrameTime();  // Get time elapsed since last frame
 		totalTime += deltaTime;
 		BeginDrawing();
 			ClearBackground(RAYWHITE);
-			DrawTextureV(game.planet, planetpos, WHITE);
-			DrawTextureV(game.asteroid[0], position1, WHITE);
+			DrawCircle(target.x, target.y, planet_radius, RED);
+			DrawTextureV(game.planet.texture, planetpos, WHITE);
+			DrawTextureV(game.asteroid[0].texture, position1, WHITE);
 			if (totalTime > spawnDelay)
-				DrawTextureV(game.asteroid[1], position2, WHITE);
+				DrawTextureV(game.asteroid[1].texture, position2, WHITE);
 			if (totalTime > spawnDelay * 2)
-				DrawTextureV(game.asteroid[2], position3, WHITE);
+				DrawTextureV(game.asteroid[2].texture, position3, WHITE);
 			if (totalTime > spawnDelay * 3)
-				DrawTextureV(game.asteroid[3], position4, WHITE);
+				DrawTextureV(game.asteroid[3].texture, position4, WHITE);
 			if (totalTime > spawnDelay * 4)
-				DrawTextureV(game.asteroid[4], position5, WHITE);
+				DrawTextureV(game.asteroid[4].texture, position5, WHITE);
 		EndDrawing();
 		position1 = moveTowards(position1, target, speed);
 		if (totalTime > spawnDelay)
@@ -139,6 +165,21 @@ int main(void)
 			position4 = moveTowards(position4, target, speed);
 		if (totalTime > spawnDelay * 4)
 			position5 = moveTowards(position5, target, speed);
+
+		asteroid1_center.x = position1.x + asteroid_radius;
+		asteroid1_center.y = position1.y + asteroid_radius;
+
+		asteroid2_center.x = position2.x + asteroid_radius;
+		asteroid2_center.y = position2.y + asteroid_radius;
+
+		asteroid3_center.x = position3.x + asteroid_radius;
+		asteroid3_center.y = position3.y + asteroid_radius;
+
+		asteroid4_center.x = position4.x + asteroid_radius;
+		asteroid4_center.y = position4.y + asteroid_radius;
+
+		asteroid5_center.x = position5.x + asteroid_radius;
+		asteroid5_center.y = position5.y + asteroid_radius;
 	}
 
 	textureUnload();

@@ -1,0 +1,18 @@
+[
+ {
+  "directory": "/home/anpollan/Projects/planet_guardians",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-Iincl",
+   "-Iraylib/src",
+   "-c",
+   "src/main.c",
+   "-o",
+   "src/main.o"
+  ],
+  "file": "src/main.c"
+ }
+]
