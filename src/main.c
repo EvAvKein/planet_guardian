@@ -32,7 +32,6 @@ int main(void)
 	initialize_all_asteroids();
 	while (!WindowShouldClose())
 	{
-<<<<<<< HEAD
 		BeginDrawing();
 			switch(game.state) {
 				case START:
@@ -45,18 +44,6 @@ int main(void)
 					deathScreen();
 			}
 		EndDrawing();
-=======
-		switch(game.state) {
-			case START:
-				drawMenu();
-				break;
-			case GAME:
-				gameplay_frame();
-				break;
-			case END:
-				deathScreen();
-		}
->>>>>>> 9643e61d0bbb6ab50c07a04a567e578f4a12400b
 	}
 	textureUnload();
 
