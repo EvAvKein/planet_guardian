@@ -42,12 +42,11 @@ void textureLoader()
 
 // TEST
 	int i = 0;
-	image = LoadImage("assets/graphics/ROCK.png");
+	image = LoadImage("assets/graphics/asteroid2.png");
 	Texture2D asteroid_texture = LoadTextureFromImage(image);
 	while (i < MAX_ASTEROIDS)
 	{
 		game.asteroid[i].texture = asteroid_texture;
-		game.asteroid[i].radius = texture4.height / 2.0f;
 		i++;
 	}
 	UnloadImage(image);
@@ -141,7 +140,8 @@ int main(void)
 			}
 			i++;
 		}
-
+		initialize_out_of_bounds_asteroids();
+		check_colliding_asteroids();
 			// float deltaTime = GetFrameTime();  // Get time elapsed since last frame
 			// totalTime += deltaTime;
 
