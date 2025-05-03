@@ -6,35 +6,44 @@ game_t game;
 
 void textureLoader()
 {
-	Image image = LoadImage("assets/graphics/icon.png");
+	Image image = LoadImage("assets/graphics/earth_normal.png");
 	Texture2D texture = LoadTextureFromImage(image);
 	game.planet.texture = texture;
 	game.planet.radius = texture.height / 2.0f;
 	UnloadImage(image);
-	image = LoadImage("assets/graphics/ROCK.png");
-	Texture2D texture1 = LoadTextureFromImage(image);
-	game.asteroid[0].texture = texture1;
+	Texture2D texture_zero = LoadTexture("assets/graphics/earth_snow.png");
+	game.cold.texture = texture_zero;
+	image = LoadImage("assets/graphics/earth_normal.png");
+	ImageCrop(&image, (Rectangle){
+		.height = image.height, .width = image.width / 2});
+	Texture2D texture_shadow = LoadTextureFromImage(image);
+	game.shadow.texture = texture_shadow;
+	game.background = LoadTexture("assets/graphics/background_1-64x64.png");
 	UnloadImage(image);
-	image = LoadImage("assets/graphics/ROCK.png");
-	Texture2D texture2 = LoadTextureFromImage(image);
-	game.asteroid[1].texture = texture2;
-	game.asteroid[1].radius = texture2.height / 2.0f;
-	UnloadImage(image);
-	image = LoadImage("assets/graphics/ROCK.png");
-	Texture2D texture3 = LoadTextureFromImage(image);
-	game.asteroid[2].texture = texture3;
-	game.asteroid[2].radius = texture3.height / 2.0f;
-	UnloadImage(image);
-	image = LoadImage("assets/graphics/ROCK.png");
-	Texture2D texture4 = LoadTextureFromImage(image);
-	game.asteroid[3].texture = texture4;
-	game.asteroid[3].radius = texture3.height / 2.0f;
-	UnloadImage(image);
-	image = LoadImage("assets/graphics/ROCK.png");
-	Texture2D texture5 = LoadTextureFromImage(image);
-	game.asteroid[4].texture = texture5;
-	game.asteroid[4].radius = texture4.height / 2.0f;
-	UnloadImage(image);
+	// image = LoadImage("assets/graphics/asteroid.png");
+	// Texture2D texture1 = LoadTextureFromImage(image);
+	// game.asteroid[0].texture = texture1;
+	// UnloadImage(image);
+	// image = LoadImage("assets/graphics/asteroid2.png");
+	// Texture2D texture2 = LoadTextureFromImage(image);
+	// game.asteroid[1].texture = texture2;
+	// game.asteroid[1].radius = texture2.height / 2.0f;
+	// UnloadImage(image);
+	// image = LoadImage("assets/graphics/asteroid.png");
+	// Texture2D texture3 = LoadTextureFromImage(image);
+	// game.asteroid[2].texture = texture3;
+	// game.asteroid[2].radius = texture3.height / 2.0f;
+	// UnloadImage(image);
+	// image = LoadImage("assets/graphics/asteroid2.png");
+	// Texture2D texture4 = LoadTextureFromImage(image);
+	// game.asteroid[3].texture = texture4;
+	// game.asteroid[3].radius = texture3.height / 2.0f;
+	// UnloadImage(image);
+	// image = LoadImage("assets/graphics/asteroid.png");
+	// Texture2D texture5 = LoadTextureFromImage(image);
+	// game.asteroid[4].texture = texture5;
+	// game.asteroid[4].radius = texture4.height / 2.0f;
+	// UnloadImage(image);
 	image = LoadImage("assets/graphics/shield.png");
 	Texture2D texture6 = LoadTextureFromImage(image);
 	game.shield.texture = texture6;
@@ -42,12 +51,13 @@ void textureLoader()
 
 // TEST
 	int i = 0;
-	image = LoadImage("assets/graphics/ROCK.png");
+	image = LoadImage("assets/graphics/asteroid.png");
+	ImageResize(&image, 20, 20);
 	Texture2D asteroid_texture = LoadTextureFromImage(image);
 	while (i < MAX_ASTEROIDS)
 	{
 		game.asteroid[i].texture = asteroid_texture;
-		game.asteroid[i].radius = texture4.height / 2.0f;
+		game.asteroid[i].radius = asteroid_texture.height / 2.0f;
 		i++;
 	}
 	UnloadImage(image);
@@ -66,11 +76,13 @@ void textureUnload()
 
 int main(void)
 {
-	float shieldAngle = 0.0f;
 	srand(time(NULL));
 	const int   screenWidth = 800;
     const int   screenHeight = 800;
-	InitWindow(screenWidth, screenHeight, "Jam!");
+	InitWindow(screenWidth, screenHeight, "Planet Guardian");
+
+	game.cold.interval = 0.15f;
+	game.shadow.interval = 0.15f;
 
 	textureLoader();
 
@@ -83,7 +95,8 @@ int main(void)
 	// calculating the target to the middle
 
 	initialize_all_asteroids();
-	
+	float shieldAngle = 0.0f;
+	int shieldDirection = 1;
 	while (!WindowShouldClose())
 	{
 
@@ -110,9 +123,10 @@ int main(void)
 		Vector2 shieldCircle6Center = Vector2Add(shieldMidPoint, Vector2Scale(tangentDir, shieldSegmentOffset * 0.7));
 
 
-		float deltaTime = GetFrameTime();
-		if (IsKeyDown(KEY_SPACE))
-			shieldAngle += deltaTime * 3.0f;  // Get time elapsed since last frame
+		if (IsKeyPressed(KEY_SPACE))
+        		shieldDirection = -shieldDirection;
+        	float deltaTime = GetFrameTime();
+		shieldAngle += deltaTime * 3.0f * shieldDirection; // Get time elapsed since last frame
 		// if (IsKeyDown(KEY_LEFT))
 		// 	shieldAngle -= deltaTime * 3.0f;  // Get time elapsed since last frame
 
@@ -146,20 +160,41 @@ int main(void)
 			// totalTime += deltaTime;
 
 		BeginDrawing();
-			ClearBackground(RAYWHITE);
+			ClearBackground(BLACK);
+
+
+
+			DrawTexturePro(game.background, (Rectangle){.x = 0, .y = 0,
+					.width = game.background.width, .height = game.background.height},
+				(Rectangle){.x = game.background.width, .y = game.background.height,
+					.width = screenWidth, .height = screenHeight},
+				(Vector2){.x = game.background.width, .y = game.background.height},
+				0,
+				WHITE);
+
+			update_planet_condition(deltaTime);
+			
 			DrawCircle(game.planet.center_pos.x, game.planet.center_pos.y, game.planet.radius, RED);
 			DrawTextureV(game.planet.texture, game.planet.pos, WHITE);
+			DrawTextureV(game.cold.texture, game.planet.pos,
+				(Color){.r = 255, .g = 255, .b = 255, .a = game.cold.value});
+
+			DrawTexturePro(game.shadow.texture,
+				(Rectangle){.x = 0, .y = 0,
+					.height = game.shadow.texture.height, .width = game.shadow.texture.width},
+				(Rectangle){.x = screenWidth / 2, .y = screenHeight / 2,
+					.height = game.shadow.texture.height, .width = game.shadow.texture.width},
+				(Vector2){.x = game.planet.texture.width / 2, .y = game.planet.texture.height / 2},
+				game.shadow.rotation,
+				(Color){.r = 0, .g = 0, .b = 0, .a = 150});
 			draw_shield(shieldAngle);
-			shieldSegmentOffset = game.shield.texture.width * 0.4f;
-			shieldSegmentRadius = game.shield.texture.width * 0.093f;
-			DrawCircleLinesV(shieldCircle1Center, shieldSegmentRadius, GREEN);
-			DrawCircleLinesV(shieldCircle2Center, shieldSegmentRadius, GREEN);
-			shieldSegmentRadius = game.shield.texture.width * 0.15f;
-			DrawCircleLinesV(shieldCircle3Center, shieldSegmentRadius, GREEN);
-			DrawCircleLinesV(shieldCircle4Center, shieldSegmentRadius, GREEN);
-			shieldSegmentRadius = game.shield.texture.width * 0.12f;
-			DrawCircleLinesV(shieldCircle5Center, shieldSegmentRadius, GREEN);
-			DrawCircleLinesV(shieldCircle6Center, shieldSegmentRadius, GREEN);
+			//debugging shield
+			// DrawCircleLinesV(shieldCircle1Center, game.shield.texture.width * 0.093f, BLACK);
+			// DrawCircleLinesV(shieldCircle2Center, game.shield.texture.width * 0.093f, BLACK);
+			// DrawCircleLinesV(shieldCircle3Center, game.shield.texture.width * 0.15f, BLACK);
+			// DrawCircleLinesV(shieldCircle4Center, game.shield.texture.width * 0.15f, BLACK);
+			// DrawCircleLinesV(shieldCircle5Center, game.shield.texture.width * 0.12f, BLACK);
+			// DrawCircleLinesV(shieldCircle6Center, game.shield.texture.width * 0.12f, BLACK);
 			draw_asteroids();
 		EndDrawing();
 	}
