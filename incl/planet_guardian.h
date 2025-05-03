@@ -51,11 +51,12 @@ typedef struct game
     cold_t     cold;
     shadow_t   shadow;
     Texture2D  background;
+    Font      font;
 } game_t;
 
 extern game_t game;
 
-void printp(char *msg, int x, int y, float size, Color color);
+void printp(char *msg, float x, float y, float size, Color color);
 Vector2 moveTowardsWithGravity(Vector2 current, Vector2 direction, int speed, Vector2 planetCenter);
 Vector2 generateAsteroidPos();
 Vector2 generateRandomDir(Vector2 current);
