@@ -14,5 +14,21 @@
    "src/main.o"
   ],
   "file": "src/main.c"
+ },
+ {
+  "directory": "/home/anpollan/Projects/planet_guardians",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-Iincl",
+   "-Iraylib/src",
+   "-c",
+   "src/initialize_asteroids.c",
+   "-o",
+   "src/initialize_asteroids.o"
+  ],
+  "file": "src/initialize_asteroids.c"
  }
 ]

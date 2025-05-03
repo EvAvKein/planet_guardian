@@ -14,7 +14,6 @@ void textureLoader()
 	image = LoadImage("assets/graphics/ROCK.png");
 	Texture2D texture1 = LoadTextureFromImage(image);
 	game.asteroid[0].texture = texture1;
-	game.asteroid[0].radius = texture1.height / 2.0f;
 	UnloadImage(image);
 	image = LoadImage("assets/graphics/ROCK.png");
 	Texture2D texture2 = LoadTextureFromImage(image);
@@ -106,14 +105,9 @@ int main(void)
 	// Aim to the middle of the planet
 	// calculating the target to the middle
 
-	game.asteroid[0].pos = generateAsteroidPos();
-	game.asteroid[1].pos = generateAsteroidPos();
-	game.asteroid[2].pos = generateAsteroidPos();
-	game.asteroid[3].pos = generateAsteroidPos();
-	game.asteroid[4].pos = generateAsteroidPos();
-
-	game.asteroid[0].speed = rand() % 5;
-
+	// Initialize asteroids
+	initialize_all_asteroids();
+	
 	float spawnDelay = 3.0f;  // Delay in seconds before spawning new asteroid
 	float totalTime = 0.0f;  // Total elapsed time
 
