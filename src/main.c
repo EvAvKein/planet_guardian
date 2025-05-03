@@ -33,6 +33,18 @@ void textureLoader()
 	game.asteroid[4].texture = texture5;
 	game.asteroid[4].radius = texture4.height / 2.0f;
 	UnloadImage(image);
+
+// TEST
+	int i = 0;
+	image = LoadImage("assets/graphics/ROCK.png");
+	Texture2D asteroid_texture = LoadTextureFromImage(image);
+	while (i < MAX_ASTEROIDS)
+	{
+		game.asteroid[i].texture = asteroid_texture;
+		game.asteroid[i].radius = texture4.height / 2.0f;
+		i++;
+	}
+	UnloadImage(image);
 }
 
 void textureUnload()
@@ -65,60 +77,33 @@ int main(void)
 	// Initialize asteroids
 	initialize_all_asteroids();
 	
-	float spawnDelay = 3.0f;  // Delay in seconds before spawning new asteroid
-	float totalTime = 0.0f;  // Total elapsed time
+	// float spawnDelay = 3.0f;  // Delay in seconds before spawning new asteroid
+	// float totalTime = 0.0f;  // Total elapsed time
+	// int asteroid1;
+	// int asteroid2;
 
 	while (!WindowShouldClose())
 	{
-		game.asteroid[0].center_pos.x = game.asteroid[0].pos.x + game.asteroid[0].radius;
-		game.asteroid[0].center_pos.y = game.asteroid[0].pos.y + game.asteroid[0].radius;
-		game.asteroid[1].center_pos.x = game.asteroid[1].pos.x + game.asteroid[1].radius;
-		game.asteroid[1].center_pos.y = game.asteroid[1].pos.y + game.asteroid[1].radius;
-		game.asteroid[2].center_pos.x = game.asteroid[2].pos.x + game.asteroid[2].radius;
-		game.asteroid[2].center_pos.y = game.asteroid[2].pos.y + game.asteroid[2].radius;
-		game.asteroid[3].center_pos.x = game.asteroid[3].pos.x + game.asteroid[3].radius;
-		game.asteroid[3].center_pos.y = game.asteroid[3].pos.y + game.asteroid[3].radius;
-		game.asteroid[4].center_pos.x = game.asteroid[4].pos.x + game.asteroid[4].radius;
-		game.asteroid[4].center_pos.y = game.asteroid[4].pos.y + game.asteroid[4].radius;
+		int i = 0;
+		while (i < MAX_ASTEROIDS)
+		{
+			game.asteroid[i].center_pos.x = game.asteroid[i].pos.x + game.asteroid[i].radius;
+			game.asteroid[i].center_pos.y = game.asteroid[i].pos.y + game.asteroid[i].radius;
+			if (CheckCollisionCircles(game.planet.center_pos, game.planet.radius, game.asteroid[i].center_pos, game.asteroid[i].radius))
+				game.asteroid[i].pos = generateAsteroidPos();
+			game.asteroid[i].pos = moveTowardsWithGravity(game.asteroid[i].pos, game.planet.center_pos, game.asteroid[i].speed, game.planet.center_pos);
+			i++;
+		}
 
-		if (CheckCollisionCircles(game.planet.center_pos, game.planet.radius, game.asteroid[0].center_pos, game.asteroid[0].radius))
-		    game.asteroid[0].pos = generateAsteroidPos();
-		if (CheckCollisionCircles(game.planet.center_pos, game.planet.radius, game.asteroid[1].center_pos, game.asteroid[1].radius))
-		    game.asteroid[1].pos = generateAsteroidPos();
-		if (CheckCollisionCircles(game.planet.center_pos, game.planet.radius, game.asteroid[2].center_pos, game.asteroid[2].radius))
-		    game.asteroid[2].pos = generateAsteroidPos();
-		if (CheckCollisionCircles(game.planet.center_pos, game.planet.radius, game.asteroid[3].center_pos, game.asteroid[3].radius))
-		    game.asteroid[3].pos = generateAsteroidPos();
-		if (CheckCollisionCircles(game.planet.center_pos, game.planet.radius, game.asteroid[4].center_pos, game.asteroid[4].radius))
-		    game.asteroid[4].pos = generateAsteroidPos();
-
-		float deltaTime = GetFrameTime();  // Get time elapsed since last frame
-		totalTime += deltaTime;
+		// float deltaTime = GetFrameTime();  // Get time elapsed since last frame
+		// totalTime += deltaTime;
 
 		BeginDrawing();
 			ClearBackground(RAYWHITE);
 			DrawCircle(game.planet.center_pos.x, game.planet.center_pos.y, game.planet.radius, RED);
 			DrawTextureV(game.planet.texture, game.planet.pos, WHITE);
-			DrawTextureV(game.asteroid[0].texture, game.asteroid[0].pos, WHITE);
-			if (totalTime > spawnDelay)
-				DrawTextureV(game.asteroid[1].texture, game.asteroid[1].pos, WHITE);
-			if (totalTime > spawnDelay * 2)
-				DrawTextureV(game.asteroid[2].texture, game.asteroid[2].pos, WHITE);
-			if (totalTime > spawnDelay * 3)
-				DrawTextureV(game.asteroid[3].texture, game.asteroid[3].pos, WHITE);
-			if (totalTime > spawnDelay * 4)
-				DrawTextureV(game.asteroid[4].texture, game.asteroid[4].pos, WHITE);
+			draw_asteroids();
 		EndDrawing();
-		game.asteroid[0].pos = moveTowardsWithGravity(game.asteroid[0].pos, game.planet.center_pos, game.asteroid[0].speed, game.planet.center_pos);
-		if (totalTime > spawnDelay)
-			game.asteroid[1].pos = moveTowardsWithGravity(game.asteroid[1].pos, game.planet.center_pos, game.asteroid[0].speed, game.planet.center_pos);
-		if (totalTime > spawnDelay * 2)
-			game.asteroid[2].pos = moveTowardsWithGravity(game.asteroid[2].pos, game.planet.center_pos, game.asteroid[0].speed, game.planet.center_pos);
-		if (totalTime > spawnDelay * 3)
-			game.asteroid[3].pos = moveTowardsWithGravity(game.asteroid[3].pos, game.planet.center_pos, game.asteroid[0].speed, game.planet.center_pos);
-		if (totalTime > spawnDelay * 4)
-			game.asteroid[4].pos = moveTowardsWithGravity(game.asteroid[4].pos, game.planet.center_pos, game.asteroid[0].speed, game.planet.center_pos);
-
 	}
 
 	textureUnload();

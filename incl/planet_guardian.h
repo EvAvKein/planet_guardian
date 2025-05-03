@@ -5,8 +5,9 @@
 # include "raylib.h"
 # include "raymath.h"
 # include <time.h>
+# include <stdio.h>
 
-# define MAX_ASTEROIDS 5
+# define MAX_ASTEROIDS 100
 # define MAX_ASTEROID_SPEED 5.0f
 # define MIN_ASTEROID_RADIUS 10.0f
 # define MAX_ASTEROID_RADIUS 20.0f
@@ -36,5 +37,7 @@ Vector2 generateRandomDir(Vector2 current);
 void initialize_all_asteroids();
 sprite_t initialize_asteroid(sprite_t asteroid);
 Vector2 get_center_pos(sprite_t sprite);
+bool check_collision(sprite_t sprite_a, sprite_t sprite_b);
+void draw_asteroids();
 
 #endif
