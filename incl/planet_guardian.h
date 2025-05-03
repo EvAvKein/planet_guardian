@@ -12,6 +12,8 @@
 # define MIN_ASTEROID_RADIUS 10.0f
 # define MAX_ASTEROID_RADIUS 20.0f
 
+void draw_shield(float angle);
+
 typedef struct sprite
 {
     Vector2     pos;
@@ -26,8 +28,11 @@ typedef struct sprite
 typedef struct game
 {
     sprite_t   planet;
+    sprite_t   shield;
     sprite_t   asteroid[MAX_ASTEROIDS];
 } game_t;
+
+
 
 extern game_t game;
 
