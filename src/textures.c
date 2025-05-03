@@ -16,12 +16,16 @@ void textureLoader()
 	Texture2D texture_shadow = LoadTextureFromImage(image);
 	game.shadow.texture = texture_shadow;
 	game.background = LoadTexture("assets/graphics/background_1-64x64.png");
+	game.menu = LoadTexture("assets/graphics/menu_background.png");
+	game.logo = LoadTexture("assets/graphics/");
 	UnloadImage(image);
 	image = LoadImage("assets/graphics/shield.png");
 	Texture2D texture6 = LoadTextureFromImage(image);
 	game.shield.sprite.texture = texture6;
 	game.shield.sprite.radius = texture6.height / 2.0f;
-
+	game.logo = LoadTexture("assets/graphics/logo_transparent.png");
+	game.menu = LoadTexture("assets/graphics/menu_background.png");
+	
 	int i = 0;
 	image = LoadImage("assets/graphics/asteroid2.png");
 	Texture2D asteroid_texture = LoadTextureFromImage(image);

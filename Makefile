@@ -10,8 +10,8 @@ SRC_FILES := main.c \
 			 draw_sprites.c \
 			 draw_shield.c \
 			 planet_condition.c \
-			 text.c
-
+			 text.c \
+			 state.c
 INCLUDE_DIR := incl
 
 LIB_FILES := raylib5_6.a

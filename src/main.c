@@ -14,6 +14,7 @@ void initialize_game()
 	game.planet.pos.y = (SCREEN_HEIGHT - game.planet.texture.height) / 2.0f;
 	game.planet.center_pos.x = game.planet.pos.x + game.planet.texture.width / 2.0f;
 	game.planet.center_pos.y = game.planet.pos.y + game.planet.texture.width / 2.0f;
+	game.state = START;
 	// Aim to the middle of the planet
 	// calculating the target to the middle
 }
@@ -31,9 +32,19 @@ int main(void)
 	initialize_all_asteroids();
 	while (!WindowShouldClose())
 	{
-		gameplay_frame();
+		BeginDrawing();
+			switch(game.state) {
+				case START:
+					drawMenu();
+					break;
+				case GAME:
+					gameplay_frame();
+					break;
+				case END:
+					deathScreen();
+			}
+		EndDrawing();
 	}
-
 	textureUnload();
 
 	CloseWindow();

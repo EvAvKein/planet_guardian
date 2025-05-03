@@ -20,6 +20,13 @@
 # define MAX_TEMP 255
 # define MIN_TEMP 0
 
+typedef enum gamestate 
+{
+    START,
+    GAME,
+    END
+} state_t;
+
 typedef struct sprite
 {
     Vector2     pos;
@@ -32,23 +39,23 @@ typedef struct sprite
 } sprite_t;
 
 typedef struct shield {
-    sprite_t   sprite;
-    float angle;
-    int direction;
+    sprite_t    sprite;
+    float       angle;
+    int         direction;
 } shield_t;
 
 typedef struct shadow {
     Texture2D   texture;
     int         rotation;
-    float elapsed;
-    float interval;
+    float       elapsed;
+    float       interval;
 } shadow_t;
 
 typedef struct cold {
-    Texture2D   texture;
-    unsigned char value;
-    float elapsed;
-    float interval;
+    Texture2D       texture;
+    unsigned char   value;
+    float           elapsed;
+    float           interval;
     // float withdrawal_limit;
     // float withdrawal_current;
 } cold_t;
@@ -61,7 +68,10 @@ typedef struct game
     cold_t     cold;
     shadow_t   shadow;
     Texture2D  background;
-    Font      font;
+    Font        font;
+    state_t    state;
+    Texture2D   logo;
+    Texture2D   menu;
 } game_t;
 
 extern game_t game;
@@ -71,7 +81,8 @@ void gameplay_frame();
 void textureLoader();
 void textureUnload();
 
-
+void drawMenu();
+void deathScreen();
 void printp(char *msg, float x, float y, float size, Color color);
 Vector2 moveTowardsWithGravity(Vector2 current, Vector2 direction, int speed, Vector2 planetCenter);
 Vector2 generateAsteroidPos();
