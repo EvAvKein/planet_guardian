@@ -4,6 +4,8 @@
 
 game_t game;
 
+
+
 void textureLoader()
 {
 	Image image = LoadImage("assets/graphics/icon.png");
@@ -36,6 +38,11 @@ void textureLoader()
 	game.asteroid[4].texture = texture5;
 	game.asteroid[4].radius = texture4.height / 2.0f;
 	UnloadImage(image);
+	image = LoadImage("assets/graphics/shield.png");
+	Texture2D texture6 = LoadTextureFromImage(image);
+	game.shield.texture = texture6;
+	game.shield.radius = texture6.height / 2.0f;
+	UnloadImage(image);
 }
 
 void textureUnload()
@@ -46,6 +53,7 @@ void textureUnload()
 	UnloadTexture(game.asteroid[2].texture);
 	UnloadTexture(game.asteroid[3].texture);
 	UnloadTexture(game.asteroid[4].texture);
+	UnloadTexture(game.shield.texture);
 }
 
 Vector2 moveTowards(Vector2 current, Vector2 target, float speed)
@@ -59,6 +67,9 @@ Vector2 moveTowards(Vector2 current, Vector2 target, float speed)
     direction = Vector2Scale(Vector2Normalize(direction), speed);
     return Vector2Add(current, direction);
 }
+
+
+
 
 
 Vector2 generateAsteroidPos()
@@ -91,6 +102,7 @@ Vector2 generateAsteroidPos()
 
 int main(void)
 {
+	float shieldAngle = 0.0f;
 	srand(time(NULL));
 	const int   screenWidth = 800;
         const int   screenHeight = 800;
@@ -105,7 +117,7 @@ int main(void)
 	game.planet.center_pos.y = game.planet.pos.y + game.planet.texture.width / 2.0f;
 	// Aim to the middle of the planet
 	// calculating the target to the middle
-
+	
 	game.asteroid[0].pos = generateAsteroidPos();
 	game.asteroid[1].pos = generateAsteroidPos();
 	game.asteroid[2].pos = generateAsteroidPos();
@@ -119,34 +131,61 @@ int main(void)
 
 	while (!WindowShouldClose())
 	{
-		game.asteroid[0].center_pos.x = game.asteroid[0].pos.x + game.asteroid[0].radius;
-		game.asteroid[0].center_pos.y = game.asteroid[0].pos.y + game.asteroid[0].radius;
-		game.asteroid[1].center_pos.x = game.asteroid[1].pos.x + game.asteroid[1].radius;
-		game.asteroid[1].center_pos.y = game.asteroid[1].pos.y + game.asteroid[1].radius;
-		game.asteroid[2].center_pos.x = game.asteroid[2].pos.x + game.asteroid[2].radius;
-		game.asteroid[2].center_pos.y = game.asteroid[2].pos.y + game.asteroid[2].radius;
-		game.asteroid[3].center_pos.x = game.asteroid[3].pos.x + game.asteroid[3].radius;
-		game.asteroid[3].center_pos.y = game.asteroid[3].pos.y + game.asteroid[3].radius;
-		game.asteroid[4].center_pos.x = game.asteroid[4].pos.x + game.asteroid[4].radius;
-		game.asteroid[4].center_pos.y = game.asteroid[4].pos.y + game.asteroid[4].radius;
+        for (int i = 0; i < 5; i++)
+        {
+            game.asteroid[i].center_pos.x = game.asteroid[i].pos.x + game.asteroid[i].radius;
+            game.asteroid[i].center_pos.y = game.asteroid[i].pos.y + game.asteroid[i].radius;
+        }
 
-		if (CheckCollisionCircles(game.planet.center_pos, game.planet.radius, game.asteroid[0].center_pos, game.asteroid[0].radius))
-		    game.asteroid[0].pos = generateAsteroidPos();
-		if (CheckCollisionCircles(game.planet.center_pos, game.planet.radius, game.asteroid[1].center_pos, game.asteroid[1].radius))
-		    game.asteroid[1].pos = generateAsteroidPos();
-		if (CheckCollisionCircles(game.planet.center_pos, game.planet.radius, game.asteroid[2].center_pos, game.asteroid[2].radius))
-		    game.asteroid[2].pos = generateAsteroidPos();
-		if (CheckCollisionCircles(game.planet.center_pos, game.planet.radius, game.asteroid[3].center_pos, game.asteroid[3].radius))
-		    game.asteroid[3].pos = generateAsteroidPos();
-		if (CheckCollisionCircles(game.planet.center_pos, game.planet.radius, game.asteroid[4].center_pos, game.asteroid[4].radius))
-		    game.asteroid[4].pos = generateAsteroidPos();
+        // --- Calculate Shield Collision Circles ---
+        float orbitRadius = game.planet.radius + 50.0f;
+        Vector2 planetCenter = game.planet.center_pos;
+        Vector2 shieldMidPoint = {
+            planetCenter.x + cosf(shieldAngle) * orbitRadius,
+            planetCenter.y + sinf(shieldAngle) * orbitRadius
+        };
+        Vector2 tangentDir = {-sinf(shieldAngle), cosf(shieldAngle)};
 
-		float deltaTime = GetFrameTime();  // Get time elapsed since last frame
+        // --- Shield Circle Parameters (TUNABLE) ---
+        float shieldSegmentOffset = game.shield.texture.width * 0.25f;
+        float shieldSegmentRadius = game.shield.texture.width * 0.25f;
+
+        // Calculate centers
+        Vector2 shieldCircle1Center = Vector2Add(shieldMidPoint, Vector2Scale(tangentDir, shieldSegmentOffset));
+        Vector2 shieldCircle2Center = Vector2Add(shieldMidPoint, Vector2Scale(tangentDir, -shieldSegmentOffset));
+
+        // --- Collision Checks ---
+        for (int i = 0; i < 5; i++)
+        {
+            // 1. Check collision with Planet
+            if (CheckCollisionCircles(game.planet.center_pos, game.planet.radius,
+                                      game.asteroid[i].center_pos, game.asteroid[i].radius))
+            {
+                game.asteroid[i].pos = generateAsteroidPos();
+                continue; // Skip shield check
+            }
+
+            // 2. Check collision with Shield (Circle 1 OR Circle 2)
+            if (CheckCollisionCircles(game.asteroid[i].center_pos, game.asteroid[i].radius, shieldCircle1Center, shieldSegmentRadius) ||
+                CheckCollisionCircles(game.asteroid[i].center_pos, game.asteroid[i].radius, shieldCircle2Center, shieldSegmentRadius) )
+            {
+                 game.asteroid[i].pos = generateAsteroidPos();
+            }
+        } 
+
+		float deltaTime = GetFrameTime();
+		if (IsKeyDown(KEY_SPACE))
+			shieldAngle += deltaTime * 3.0f;  // Get time elapsed since last frame
+		// if (IsKeyDown(KEY_LEFT))
+		// 	shieldAngle -= deltaTime * 3.0f;  // Get time elapsed since last frame
 		totalTime += deltaTime;
 		BeginDrawing();
 			ClearBackground(RAYWHITE);
 			DrawCircle(game.planet.center_pos.x, game.planet.center_pos.y, game.planet.radius, RED);
 			DrawTextureV(game.planet.texture, game.planet.pos, WHITE);
+			draw_shield(shieldAngle);
+			//DrawCircleLinesV(shieldCircle1Center, shieldSegmentRadius, GREEN);
+            //DrawCircleLinesV(shieldCircle2Center, shieldSegmentRadius, GREEN);
 			DrawTextureV(game.asteroid[0].texture, game.asteroid[0].pos, WHITE);
 			if (totalTime > spawnDelay)
 				DrawTextureV(game.asteroid[1].texture, game.asteroid[1].pos, WHITE);

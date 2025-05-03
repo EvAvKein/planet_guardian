@@ -6,6 +6,8 @@
 # include "raymath.h"
 # include <time.h>
 
+void draw_shield(float angle);
+
 typedef struct sprite
 {
     Vector2     pos;
@@ -21,8 +23,12 @@ typedef struct game
 {
     sprite_t   planet;
     sprite_t   asteroid[5];
+    sprite_t   shield;
 } game_t;
 
+
+
 extern game_t game;
+
 
 #endif
