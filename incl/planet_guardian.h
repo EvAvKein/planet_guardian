@@ -6,6 +6,11 @@
 # include "raymath.h"
 # include <time.h>
 
+# define MAX_ASTEROIDS 5
+# define MAX_ASTEROID_SPEED 5.0f
+# define MIN_ASTEROID_RADIUS 10.0f
+# define MAX_ASTEROID_RADIUS 20.0f
+
 typedef struct sprite
 {
     Vector2     pos;
@@ -14,13 +19,13 @@ typedef struct sprite
     Vector2     direction;
     Vector2     center_pos;
     bool        is_inside_screen;
-    int       speed;
+	float       speed;
 } sprite_t;
 
 typedef struct game
 {
     sprite_t   planet;
-    sprite_t   asteroid[5];
+    sprite_t   asteroid[MAX_ASTEROIDS];
 } game_t;
 
 extern game_t game;
@@ -28,5 +33,8 @@ extern game_t game;
 Vector2 moveTowardsWithGravity(Vector2 current, Vector2 direction, int speed, Vector2 planetCenter);
 Vector2 generateAsteroidPos();
 Vector2 generateRandomDir(Vector2 current);
+void initialize_all_asteroids();
+sprite_t initialize_asteroid(sprite_t asteroid);
+Vector2 get_center_pos(sprite_t sprite);
 
 #endif
