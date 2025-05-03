@@ -12,6 +12,9 @@
 # define MIN_ASTEROID_RADIUS 10.0f
 # define MAX_ASTEROID_RADIUS 20.0f
 # define GRAVITYPULL_SCALE 0.000005f
+# define TEMP_CHANGE 10 
+# define MAX_TEMP 255
+# define MIN_TEMP 0
 
 void draw_shield(float angle);
 
@@ -64,8 +67,10 @@ sprite_t initialize_asteroid(sprite_t asteroid);
 Vector2 get_center_pos(sprite_t sprite);
 bool check_collision(sprite_t sprite_a, sprite_t sprite_b);
 void draw_asteroids();
-void	update_planet_condition(float delta_time);
 void check_colliding_asteroids();
 void initialize_out_of_bounds_asteroids();
+void	update_planet_condition(float delta_time, float shieldAngle);
+
+
 
 #endif
