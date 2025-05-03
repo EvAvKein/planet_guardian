@@ -16,6 +16,8 @@ void textureLoader()
 	Texture2D texture_shadow = LoadTextureFromImage(image);
 	game.shadow.texture = texture_shadow;
 	game.background = LoadTexture("assets/graphics/background_1-64x64.png");
+	game.menu = LoadTexture("assets/graphics/menu_background.png");
+	game.logo = LoadTexture("assets/graphics/");
 	UnloadImage(image);
 	image = LoadImage("assets/graphics/shield.png");
 	Texture2D texture6 = LoadTextureFromImage(image);

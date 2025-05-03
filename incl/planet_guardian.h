@@ -88,7 +88,8 @@ void gameplay_frame();
 void textureLoader();
 void textureUnload();
 
-
+void drawMenu();
+void deathScreen();
 void printp(char *msg, float x, float y, float size, Color color);
 Vector2 moveTowardsWithGravity(Vector2 current, Vector2 direction, int speed, Vector2 planetCenter);
 Vector2 generateAsteroidPos();
