@@ -21,7 +21,7 @@ sprite_t initialize_asteroid(sprite_t asteroid)
 		asteroid.direction = game.planet.center_pos;
 		asteroid.speed = fmod(rand(), MAX_ASTEROID_SPEED);
 		// CHANGE IF NEEDED THE DIRECTION
-		asteroid.radius = MIN_ASTEROID_RADIUS;
+		asteroid.radius = asteroid.texture.width / 2.0f;
 	return (asteroid);
 }
 

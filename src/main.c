@@ -54,6 +54,7 @@ void textureLoader()
 	int i = 0;
 	image = LoadImage("assets/graphics/asteroid.png");
 	ImageResize(&image, 20, 20);
+	image = LoadImage("assets/graphics/asteroid2.png");
 	Texture2D asteroid_texture = LoadTextureFromImage(image);
 	while (i < MAX_ASTEROIDS)
 	{
@@ -156,7 +157,8 @@ int main(void)
 			}
 			i++;
 		}
-
+		initialize_out_of_bounds_asteroids();
+		check_colliding_asteroids();
 			// float deltaTime = GetFrameTime();  // Get time elapsed since last frame
 			// totalTime += deltaTime;
 

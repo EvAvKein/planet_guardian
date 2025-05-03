@@ -7,7 +7,7 @@
 # include <time.h>
 # include <stdio.h>
 
-# define MAX_ASTEROIDS 100
+# define MAX_ASTEROIDS 15
 # define MAX_ASTEROID_SPEED 10.0f
 # define MIN_ASTEROID_RADIUS 10.0f
 # define MAX_ASTEROID_RADIUS 20.0f
@@ -65,5 +65,7 @@ Vector2 get_center_pos(sprite_t sprite);
 bool check_collision(sprite_t sprite_a, sprite_t sprite_b);
 void draw_asteroids();
 void	update_planet_condition(float delta_time);
+void check_colliding_asteroids();
+void initialize_out_of_bounds_asteroids();
 
 #endif
