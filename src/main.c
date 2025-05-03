@@ -96,7 +96,8 @@ int main(void)
 	// calculating the target to the middle
 
 	initialize_all_asteroids();
-	
+	float shieldAngle = 0.0f;
+	int shieldDirection = 1;
 	while (!WindowShouldClose())
 	{
 
@@ -123,9 +124,10 @@ int main(void)
 		Vector2 shieldCircle6Center = Vector2Add(shieldMidPoint, Vector2Scale(tangentDir, shieldSegmentOffset * 0.7));
 
 
-		float deltaTime = GetFrameTime();
-		if (IsKeyDown(KEY_SPACE))
-			shieldAngle += deltaTime * 3.0f;  // Get time elapsed since last frame
+		if (IsKeyPressed(KEY_SPACE))
+        		shieldDirection = -shieldDirection;
+        	float deltaTime = GetFrameTime();
+		shieldAngle += deltaTime * 3.0f * shieldDirection; // Get time elapsed since last frame
 		// if (IsKeyDown(KEY_LEFT))
 		// 	shieldAngle -= deltaTime * 3.0f;  // Get time elapsed since last frame
 
@@ -187,16 +189,13 @@ int main(void)
 				game.shadow.rotation,
 				(Color){.r = 0, .g = 0, .b = 0, .a = 150});
 			draw_shield(shieldAngle);
-			shieldSegmentOffset = game.shield.texture.width * 0.4f;
-			shieldSegmentRadius = game.shield.texture.width * 0.093f;
-			DrawCircleLinesV(shieldCircle1Center, shieldSegmentRadius, GREEN);
-			DrawCircleLinesV(shieldCircle2Center, shieldSegmentRadius, GREEN);
-			shieldSegmentRadius = game.shield.texture.width * 0.15f;
-			DrawCircleLinesV(shieldCircle3Center, shieldSegmentRadius, GREEN);
-			DrawCircleLinesV(shieldCircle4Center, shieldSegmentRadius, GREEN);
-			shieldSegmentRadius = game.shield.texture.width * 0.12f;
-			DrawCircleLinesV(shieldCircle5Center, shieldSegmentRadius, GREEN);
-			DrawCircleLinesV(shieldCircle6Center, shieldSegmentRadius, GREEN);
+			//debugging shield
+			// DrawCircleLinesV(shieldCircle1Center, game.shield.texture.width * 0.093f, BLACK);
+			// DrawCircleLinesV(shieldCircle2Center, game.shield.texture.width * 0.093f, BLACK);
+			// DrawCircleLinesV(shieldCircle3Center, game.shield.texture.width * 0.15f, BLACK);
+			// DrawCircleLinesV(shieldCircle4Center, game.shield.texture.width * 0.15f, BLACK);
+			// DrawCircleLinesV(shieldCircle5Center, game.shield.texture.width * 0.12f, BLACK);
+			// DrawCircleLinesV(shieldCircle6Center, game.shield.texture.width * 0.12f, BLACK);
 			draw_asteroids();
 		EndDrawing();
 	}
