@@ -147,12 +147,17 @@ int main(void)
         Vector2 tangentDir = {-sinf(shieldAngle), cosf(shieldAngle)};
 
         // --- Shield Circle Parameters (TUNABLE) ---
-        float shieldSegmentOffset = game.shield.texture.width * 0.25f;
-        float shieldSegmentRadius = game.shield.texture.width * 0.25f;
-
-        // Calculate centers
+        float shieldSegmentOffset = game.shield.texture.width * 0.4f;
+        float shieldSegmentRadius = game.shield.texture.width * 0.15;
         Vector2 shieldCircle1Center = Vector2Add(shieldMidPoint, Vector2Scale(tangentDir, shieldSegmentOffset));
-        Vector2 shieldCircle2Center = Vector2Add(shieldMidPoint, Vector2Scale(tangentDir, -shieldSegmentOffset));
+		Vector2 shieldCircle2Center = Vector2Add(shieldMidPoint, Vector2Scale(tangentDir, -shieldSegmentOffset));
+		shieldSegmentRadius = game.shield.texture.width * 0.093f;
+        Vector2 shieldCircle3Center = Vector2Add(shieldMidPoint, Vector2Scale(tangentDir, -shieldSegmentOffset * 0.2));
+		Vector2 shieldCircle4Center = Vector2Add(shieldMidPoint, Vector2Scale(tangentDir, shieldSegmentOffset * 0.2));
+        shieldSegmentRadius = game.shield.texture.width * 0.12f;
+        Vector2 shieldCircle5Center = Vector2Add(shieldMidPoint, Vector2Scale(tangentDir, -shieldSegmentOffset * 0.7));
+		Vector2 shieldCircle6Center = Vector2Add(shieldMidPoint, Vector2Scale(tangentDir, shieldSegmentOffset * 0.7));
+
 
         // --- Collision Checks ---
         for (int i = 0; i < 5; i++)
@@ -167,7 +172,11 @@ int main(void)
 
             // 2. Check collision with Shield (Circle 1 OR Circle 2)
             if (CheckCollisionCircles(game.asteroid[i].center_pos, game.asteroid[i].radius, shieldCircle1Center, shieldSegmentRadius) ||
-                CheckCollisionCircles(game.asteroid[i].center_pos, game.asteroid[i].radius, shieldCircle2Center, shieldSegmentRadius) )
+                CheckCollisionCircles(game.asteroid[i].center_pos, game.asteroid[i].radius, shieldCircle2Center, shieldSegmentRadius) ||
+                CheckCollisionCircles(game.asteroid[i].center_pos, game.asteroid[i].radius, shieldCircle3Center, shieldSegmentRadius)||
+                CheckCollisionCircles(game.asteroid[i].center_pos, game.asteroid[i].radius, shieldCircle4Center, shieldSegmentRadius)||
+                CheckCollisionCircles(game.asteroid[i].center_pos, game.asteroid[i].radius, shieldCircle5Center, shieldSegmentRadius)||
+                CheckCollisionCircles(game.asteroid[i].center_pos, game.asteroid[i].radius, shieldCircle6Center, shieldSegmentRadius))
             {
                  game.asteroid[i].pos = generateAsteroidPos();
             }
@@ -184,8 +193,16 @@ int main(void)
 			DrawCircle(game.planet.center_pos.x, game.planet.center_pos.y, game.planet.radius, RED);
 			DrawTextureV(game.planet.texture, game.planet.pos, WHITE);
 			draw_shield(shieldAngle);
-			//DrawCircleLinesV(shieldCircle1Center, shieldSegmentRadius, GREEN);
-            //DrawCircleLinesV(shieldCircle2Center, shieldSegmentRadius, GREEN);
+			// shieldSegmentOffset = game.shield.texture.width * 0.4f; debugging
+			// shieldSegmentRadius = game.shield.texture.width * 0.093f;
+			// DrawCircleLinesV(shieldCircle1Center, shieldSegmentRadius, GREEN);
+            // DrawCircleLinesV(shieldCircle2Center, shieldSegmentRadius, GREEN);
+			// shieldSegmentRadius = game.shield.texture.width * 0.15f;
+			// DrawCircleLinesV(shieldCircle3Center, shieldSegmentRadius, GREEN);
+            // DrawCircleLinesV(shieldCircle4Center, shieldSegmentRadius, GREEN);
+			// shieldSegmentRadius = game.shield.texture.width * 0.12f;
+			// DrawCircleLinesV(shieldCircle5Center, shieldSegmentRadius, GREEN);
+            // DrawCircleLinesV(shieldCircle6Center, shieldSegmentRadius, GREEN);
 			DrawTextureV(game.asteroid[0].texture, game.asteroid[0].pos, WHITE);
 			if (totalTime > spawnDelay)
 				DrawTextureV(game.asteroid[1].texture, game.asteroid[1].pos, WHITE);
