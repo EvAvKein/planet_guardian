@@ -21,7 +21,10 @@ typedef struct game
 {
     sprite_t   planet;
     sprite_t   asteroid[5];
+    Font       pixelTtf;
 } game_t;
+
+void printp(char *msg, int x, int y, float size, Color color);
 
 extern game_t game;
 
