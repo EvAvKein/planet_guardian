@@ -6,20 +6,20 @@ Vector2 moveTowardsWithGravity(Vector2 current, Vector2 direction, int speed, Ve
     Vector2 toPlanet = Vector2Subtract(planetCenter, current);
     float distance = Vector2Length(toPlanet);
 
-    printf("Planetcenter %f, %f\n", planetCenter.x, planetCenter.y);
+    //printf("Planetcenter %f, %f\n", planetCenter.x, planetCenter.y);
 
     // Normalize and apply gravity (simple proportional pull)
     float gravityStrength = 1.0f / (distance * GRAVITYPULL_SCALE); // Adjust 0.1f to control gravity intensity
-    printf("gravityStrength, %f \n", gravityStrength);
+    //printf("gravityStrength, %f \n", gravityStrength);
     Vector2 gravityPull = Vector2Scale(Vector2Normalize(toPlanet), gravityStrength);  // Tune 0.001f as needed
 
-    printf("gravity pull %f, %f\n", gravityPull.x, gravityPull.y);
+    //printf("gravity pull %f, %f\n", gravityPull.x, gravityPull.y);
     // Combine direction and gravity
     Vector2 moveDir = Vector2Add(direction, gravityPull);
     moveDir = Vector2Scale(moveDir, speed);
     moveDir = Vector2Normalize(moveDir);
 
-    printf("movedir %f, %f\n", moveDir.x, moveDir.y);
+    //printf("movedir %f, %f\n", moveDir.x, moveDir.y);
     return Vector2Add(current, moveDir);
 }
 
