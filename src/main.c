@@ -31,7 +31,16 @@ int main(void)
 	initialize_all_asteroids();
 	while (!WindowShouldClose())
 	{
-		gameplay_frame();
+		switch(game.state) {
+			case START:
+				drawMenu();
+				break;
+			case GAME:
+				gameplay_frame();
+				break;
+			case END:
+				deathScreen();
+		}
 	}
 
 	textureUnload();
