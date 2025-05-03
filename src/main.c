@@ -76,7 +76,6 @@ void textureUnload()
 
 int main(void)
 {
-	float shieldAngle = 0.0f;
 	srand(time(NULL));
 	const int   screenWidth = 800;
     const int   screenHeight = 800;
