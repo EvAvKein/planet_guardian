@@ -84,6 +84,7 @@ void draw_asteroids();
 void draw_shield(float angle);
 void check_colliding_asteroids();
 void initialize_out_of_bounds_asteroids();
-void	update_planet_condition(float delta_time, float shieldAngle);
+void update_planet_condition(float delta_time, float shieldAngle);
+void play_shield_sound();
 
 #endif
