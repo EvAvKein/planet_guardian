@@ -11,6 +11,10 @@ typedef struct sprite
     Vector2     pos;
     Texture2D   texture;
     float       radius;
+    Vector2     direction;
+    Vector2     center_pos;
+    bool        is_inside_screen;
+    int       speed;
 } sprite_t;
 
 typedef struct game
@@ -20,5 +24,9 @@ typedef struct game
 } game_t;
 
 extern game_t game;
+
+Vector2 moveTowardsWithGravity(Vector2 current, Vector2 direction, int speed, Vector2 planetCenter);
+Vector2 generateAsteroidPos();
+Vector2 generateRandomDir(Vector2 current);
 
 #endif

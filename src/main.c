@@ -1,5 +1,4 @@
 #include "planet_guardian.h"
-#include "raylib.h"
 
 game_t game;
 
@@ -47,52 +46,11 @@ void textureUnload()
 	UnloadTexture(game.asteroid[4].texture);
 }
 
-Vector2 moveTowards(Vector2 current, Vector2 target, float speed)
-{
-
-	Vector2 direction = Vector2Subtract(target, current);
-    float distance = Vector2Length(direction);
-
-	if (distance <= speed || distance == 0.0f) return target;
-
-    direction = Vector2Scale(Vector2Normalize(direction), speed);
-    return Vector2Add(current, direction);
-}
-
-
-Vector2 generateAsteroidPos()
-{
-    int edge = rand() % 4;
-    Vector2 position;
-
-    switch (edge)
-    {
-        case 0:
-            position.x = (float)(rand() % GetScreenWidth());
-            position.y = -50;
-            break;
-        case 1:
-            position.x = GetScreenWidth() + 50;
-            position.y = (float)(rand() % GetScreenHeight());
-            break;
-        case 2:
-            position.x = (float)(rand() % GetScreenWidth());
-            position.y = GetScreenHeight() + 50;
-            break;
-        case 3:
-            position.x = -50;
-            position.y = (float)(rand() % GetScreenHeight());
-            break;
-    }
-
-    return position;
-}
-
 int main(void)
 {
 	srand(time(NULL));
 	const int   screenWidth = 800;
-        const int   screenHeight = 800;
+    const int   screenHeight = 800;
 	InitWindow(screenWidth, screenHeight, "Jam!");
 
 	textureLoader();
@@ -109,7 +67,12 @@ int main(void)
 		x + game.planet.texture.width / 2.0f,
 		y + game.planet.texture.height / 2.0f
 	};
-	float speed = 1.5f;
+
+	game.asteroid[0].speed = 1;
+	game.asteroid[1].speed = 1;
+	game.asteroid[2].speed = 1;
+	game.asteroid[3].speed = 1;
+	game.asteroid[4].speed = 1;
 
 	int	asteroid_radius = 10;
 	Vector2 position1 = generateAsteroidPos();
@@ -117,6 +80,12 @@ int main(void)
 	Vector2 position3 = generateAsteroidPos();
 	Vector2 position4 = generateAsteroidPos();
 	Vector2 position5 = generateAsteroidPos();
+
+	game.asteroid[0].direction = generateRandomDir(game.asteroid[0].pos);
+	game.asteroid[1].direction = generateRandomDir(game.asteroid[1].pos);
+	game.asteroid[2].direction = generateRandomDir(game.asteroid[2].pos);
+	game.asteroid[3].direction = generateRandomDir(game.asteroid[3].pos);
+	game.asteroid[4].direction = generateRandomDir(game.asteroid[4].pos);
 
 	Vector2 asteroid1_center = { position1.x - asteroid_radius, position1.y - asteroid_radius};
 	Vector2 asteroid2_center = { position2.x - asteroid_radius, position2.y - asteroid_radius};
@@ -172,15 +141,15 @@ int main(void)
 				DrawTextureV(game.asteroid[4].texture, position5, WHITE);
 			DrawTextureEx(rotatingImage, (Vector2){x - rotatingImage.width / 2.0f, y - rotatingImage.height / 2.0f}, angle * 180.0f / PI, 1.0f, WHITE);
 		EndDrawing();
-		position1 = moveTowards(position1, target, speed);
+		position1 = moveTowardsWithGravity(position1, game.asteroid[0].direction, game.asteroid[0].speed, game.planet.center_pos);
 		if (totalTime > spawnDelay)
-			position2 = moveTowards(position2, target, speed);
+			position2 = moveTowardsWithGravity(position2, game.asteroid[1].direction, game.asteroid[1].speed, game.planet.center_pos);
 		if (totalTime > spawnDelay * 2)
-			position3 = moveTowards(position3, target, speed);
+			position3 = moveTowardsWithGravity(position3, game.asteroid[2].direction, game.asteroid[2].speed, game.planet.center_pos);
 		if (totalTime > spawnDelay * 3)
-			position4 = moveTowards(position4, target, speed);
+			position4 = moveTowardsWithGravity(position4, game.asteroid[3].direction, game.asteroid[3].speed, game.planet.center_pos);
 		if (totalTime > spawnDelay * 4)
-			position5 = moveTowards(position5, target, speed);
+			position5 = moveTowardsWithGravity(position5, game.asteroid[4].direction, game.asteroid[4].speed, game.planet.center_pos);
 
 		asteroid1_center.x = position1.x + asteroid_radius;
 		asteroid1_center.y = position1.y + asteroid_radius;
