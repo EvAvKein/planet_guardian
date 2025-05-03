@@ -27,13 +27,6 @@ typedef enum gamestate
     END
 } state_t;
 
-typedef enum gamestate 
-{
-    START,
-    GAME,
-    END
-} state_t;
-
 typedef struct sprite
 {
     Vector2     pos;

@@ -32,18 +32,19 @@ int main(void)
 	initialize_all_asteroids();
 	while (!WindowShouldClose())
 	{
-		switch(game.state) {
-			case START:
-				drawMenu();
-				break;
-			case GAME:
-				gameplay_frame();
-				break;
-			case END:
-				deathScreen();
-		}
+		BeginDrawing();
+			switch(game.state) {
+				case START:
+					drawMenu();
+					break;
+				case GAME:
+					gameplay_frame();
+					break;
+				case END:
+					deathScreen();
+			}
+		EndDrawing();
 	}
-
 	textureUnload();
 
 	CloseWindow();
