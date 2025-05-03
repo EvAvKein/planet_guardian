@@ -8,15 +8,15 @@
 
 typedef struct sprite
 {
-    Vector2 pos;
-    Texture2D *texture;
-    float radius;
+    Vector2     pos;
+    Texture2D   texture;
+    float       radius;
 } sprite_t;
 
 typedef struct game
 {
-    Texture2D planet;
-    Texture2D asteroid[5];
+    sprite_t   planet;
+    sprite_t   asteroid[5];
 } game_t;
 
 extern game_t game;
