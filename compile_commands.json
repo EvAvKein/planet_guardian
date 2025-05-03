@@ -30,5 +30,53 @@
    "src/initialize_asteroids.o"
   ],
   "file": "src/initialize_asteroids.c"
+ },
+ {
+  "directory": "/home/anpollan/Projects/planet_guardians",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-Iincl",
+   "-Iraylib/src",
+   "-c",
+   "src/movement.c",
+   "-o",
+   "src/movement.o"
+  ],
+  "file": "src/movement.c"
+ },
+ {
+  "directory": "/home/anpollan/Projects/planet_guardians",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-Iincl",
+   "-Iraylib/src",
+   "-c",
+   "src/collision_detection.c",
+   "-o",
+   "src/collision_detection.o"
+  ],
+  "file": "src/collision_detection.c"
+ },
+ {
+  "directory": "/home/anpollan/Projects/planet_guardians",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-Iincl",
+   "-Iraylib/src",
+   "-c",
+   "src/draw_sprites.c",
+   "-o",
+   "src/draw_sprites.o"
+  ],
+  "file": "src/draw_sprites.c"
  }
 ]
