@@ -68,14 +68,6 @@ int main(void)
 	float spawnDelay = 3.0f;  // Delay in seconds before spawning new asteroid
 	float totalTime = 0.0f;  // Total elapsed time
 
-	Image image = LoadImage("assets/graphics/shield.png");
-	Texture2D rotatingImage = LoadTextureFromImage(image); // Replace with your image
-    Vector2 planetPosition = { screenWidth / 2.0f, screenHeight / 2.0f }; // Position of the planet
-    float rotationRadius = 150.0f; // Radius of the circular orbit around the planet
-
-    // Variable to control the rotation angle (in radians)
-    float angle = 0.0f;
-
 	while (!WindowShouldClose())
 	{
 		game.asteroid[0].center_pos.x = game.asteroid[0].pos.x + game.asteroid[0].radius;
@@ -103,11 +95,6 @@ int main(void)
 		float deltaTime = GetFrameTime();  // Get time elapsed since last frame
 		totalTime += deltaTime;
 
-		 // Calculate the new position of the rotating image based on the angle
-		 float x = planetPosition.x + rotationRadius * cos(angle);
-		 float y = planetPosition.y + rotationRadius * sin(angle);
-
-
 		BeginDrawing();
 			ClearBackground(RAYWHITE);
 			DrawCircle(game.planet.center_pos.x, game.planet.center_pos.y, game.planet.radius, RED);
@@ -122,15 +109,15 @@ int main(void)
 			if (totalTime > spawnDelay * 4)
 				DrawTextureV(game.asteroid[4].texture, game.asteroid[4].pos, WHITE);
 		EndDrawing();
-		game.asteroid[0].pos = moveTowardsWithGravity(game.asteroid[0].pos, game.planet.center_pos, game.asteroid[0].speed);
+		game.asteroid[0].pos = moveTowardsWithGravity(game.asteroid[0].pos, game.planet.center_pos, game.asteroid[0].speed, game.planet.center_pos);
 		if (totalTime > spawnDelay)
-			game.asteroid[1].pos = moveTowardsWithGravity(game.asteroid[1].pos, game.planet.center_pos, game.asteroid[0].speed);
+			game.asteroid[1].pos = moveTowardsWithGravity(game.asteroid[1].pos, game.planet.center_pos, game.asteroid[0].speed, game.planet.center_pos);
 		if (totalTime > spawnDelay * 2)
-			game.asteroid[2].pos = moveTowardsWithGravity(game.asteroid[2].pos, game.planet.center_pos, game.asteroid[0].speed);
+			game.asteroid[2].pos = moveTowardsWithGravity(game.asteroid[2].pos, game.planet.center_pos, game.asteroid[0].speed, game.planet.center_pos);
 		if (totalTime > spawnDelay * 3)
-			game.asteroid[3].pos = moveTowardsWithGravity(game.asteroid[3].pos, game.planet.center_pos, game.asteroid[0].speed);
+			game.asteroid[3].pos = moveTowardsWithGravity(game.asteroid[3].pos, game.planet.center_pos, game.asteroid[0].speed, game.planet.center_pos);
 		if (totalTime > spawnDelay * 4)
-			game.asteroid[4].pos = moveTowardsWithGravity(game.asteroid[4].pos, game.planet.center_pos, game.asteroid[0].speed);
+			game.asteroid[4].pos = moveTowardsWithGravity(game.asteroid[4].pos, game.planet.center_pos, game.asteroid[0].speed, game.planet.center_pos);
 
 	}
 
