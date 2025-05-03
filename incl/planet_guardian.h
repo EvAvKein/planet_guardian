@@ -8,9 +8,12 @@
 # include <stdio.h>
 
 # define MAX_ASTEROIDS 100
-# define MAX_ASTEROID_SPEED 5.0f
+# define MAX_ASTEROID_SPEED 10.0f
 # define MIN_ASTEROID_RADIUS 10.0f
 # define MAX_ASTEROID_RADIUS 20.0f
+# define GRAVITYPULL_SCALE 0.00001f
+
+void draw_shield(float angle);
 
 typedef struct sprite
 {
@@ -26,8 +29,11 @@ typedef struct sprite
 typedef struct game
 {
     sprite_t   planet;
+    sprite_t   shield;
     sprite_t   asteroid[MAX_ASTEROIDS];
 } game_t;
+
+
 
 extern game_t game;
 
