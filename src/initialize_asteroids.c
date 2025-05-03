@@ -18,11 +18,12 @@ sprite_t initialize_asteroid(sprite_t asteroid)
 		asteroid.pos = generateAsteroidPos();
 		asteroid.center_pos = get_center_pos(asteroid);
 		// CHANGE THE DIRECTION
-		asteroid.direction = game.planet.center_pos;
-		asteroid.speed = fmod(rand(), MAX_ASTEROID_SPEED);
+		asteroid.direction = generateRandomDir(asteroid.pos);
+		asteroid.speed = GetRandomValue(1, MAX_ASTEROID_SPEED);
 		// CHANGE IF NEEDED THE DIRECTION
-		asteroid.radius = MIN_ASTEROID_RADIUS;
+		asteroid.radius = asteroid.texture.width / 2.0f;
 	return (asteroid);
+
 }
 
 Vector2 get_center_pos(sprite_t sprite)
