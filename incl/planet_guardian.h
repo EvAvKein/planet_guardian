@@ -11,6 +11,10 @@ typedef struct sprite
     Vector2     pos;
     Texture2D   texture;
     float       radius;
+    Vector2     direction;
+    Vector2     center_pos;
+    bool        is_inside_screen;
+	float       speed;
 } sprite_t;
 
 typedef struct game
