@@ -52,8 +52,6 @@ void textureLoader()
 
 // TEST
 	int i = 0;
-	image = LoadImage("assets/graphics/asteroid.png");
-	ImageResize(&image, 20, 20);
 	image = LoadImage("assets/graphics/asteroid2.png");
 	Texture2D asteroid_texture = LoadTextureFromImage(image);
 	while (i < MAX_ASTEROIDS)
@@ -79,8 +77,8 @@ void textureUnload()
 int main(void)
 {
 	srand(time(NULL));
-	const int   screenWidth = 800;
-    const int   screenHeight = 800;
+	const int   screenWidth = 1000;
+    const int   screenHeight = 1000;
 	InitWindow(screenWidth, screenHeight, "Planet Guardian");
 
 	game.cold.interval = 0.15f;
@@ -143,7 +141,7 @@ int main(void)
 			game.asteroid[i].center_pos.x = game.asteroid[i].pos.x + game.asteroid[i].radius;
 			game.asteroid[i].center_pos.y = game.asteroid[i].pos.y + game.asteroid[i].radius;
 			if (CheckCollisionCircles(game.planet.center_pos, game.planet.radius, game.asteroid[i].center_pos, game.asteroid[i].radius))
-				game.asteroid[i].pos = generateAsteroidPos();
+				game.asteroid[i] = initialize_asteroid(game.asteroid[i]);
 			game.asteroid[i].pos = moveTowardsWithGravity(game.asteroid[i].pos, game.planet.center_pos, game.asteroid[i].speed, game.planet.center_pos);
 
 			if (CheckCollisionCircles(game.asteroid[i].center_pos, game.asteroid[i].radius, shieldCircle1Center, shieldSegmentRadius) ||
@@ -176,7 +174,6 @@ int main(void)
 				WHITE);
 
 			update_planet_condition(deltaTime);
-			DrawCircle(game.planet.center_pos.x, game.planet.center_pos.y, game.planet.radius, RED);
 			DrawTextureV(game.planet.texture, game.planet.pos, WHITE);
 			DrawTextureV(game.cold.texture, game.planet.pos,
 				(Color){.r = 255, .g = 255, .b = 255, .a = game.cold.value});
