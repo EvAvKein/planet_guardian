@@ -26,14 +26,31 @@ typedef struct sprite
 	float       speed;
 } sprite_t;
 
+typedef struct shadow {
+    Texture2D   texture;
+    int         rotation;
+    float elapsed;
+    float interval;
+} shadow_t;
+
+typedef struct cold {
+    Texture2D   texture;
+    unsigned char value;
+    float elapsed;
+    float interval;
+    // float withdrawal_limit;
+    // float withdrawal_current;
+} cold_t;
+
 typedef struct game
 {
     sprite_t   planet;
     sprite_t   shield;
     sprite_t   asteroid[MAX_ASTEROIDS];
+    cold_t     cold;
+    shadow_t   shadow;
+    Texture2D  background;
 } game_t;
-
-
 
 extern game_t game;
 
@@ -45,5 +62,6 @@ sprite_t initialize_asteroid(sprite_t asteroid);
 Vector2 get_center_pos(sprite_t sprite);
 bool check_collision(sprite_t sprite_a, sprite_t sprite_b);
 void draw_asteroids();
+void	update_planet_condition(float delta_time);
 
 #endif
