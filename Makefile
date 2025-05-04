@@ -40,6 +40,9 @@ fclean: clean
 
 re: fclean all
 
+run: $(NAME)
+	./$(NAME)
+
 neat: $(NAME) clean
 	clear
 

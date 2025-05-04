@@ -43,12 +43,12 @@ void gameplay_frame()
 		game.asteroid[i].center_pos.y = game.asteroid[i].pos.y + game.asteroid[i].radius;
 		if (CheckCollisionCircles(game.planet.center_pos, game.planet.radius, game.asteroid[i].center_pos, game.asteroid[i].radius))
 		{
-			if (game.current_health > 0) {
-                game.current_health--;;
-			}
-            if (game.current_health <= 0) {
-                game.state = END;
-            }
+			if (!--game.current_health)
+			{
+				game.state = END;
+				game.lose_reason = METEORS;
+				return ;
+			};
 			game.asteroid[i] = initialize_asteroid(game.asteroid[i]);
 		}
 		game.asteroid[i].pos = moveTowardsWithGravity(game.asteroid[i].pos, game.asteroid[i].direction, game.asteroid[i].speed, game.planet.center_pos);
@@ -73,8 +73,6 @@ void gameplay_frame()
 	BeginDrawing();
 		ClearBackground(BLACK);
 
-
-
 		DrawTexturePro(game.background, (Rectangle){.x = 0, .y = 0,
 				.width = game.background.width, .height = game.background.height},
 			(Rectangle){.x = game.background.width, .y = game.background.height,
@@ -84,8 +82,20 @@ void gameplay_frame()
 			WHITE);
 
 		update_planet_condition(deltaTime, game.shield.angle);
+		if (game.temp.value == MAX_TEMP)
+		{
+			game.state = END;
+			game.lose_reason = HEAT;
+			return ;
+		}
+		if (game.temp.value == MIN_TEMP)
+		{
+			game.state = END;
+			game.lose_reason = COLD;
+			return ;
+		}
+
 		DrawTextureV(game.planet.texture, game.planet.pos, WHITE);
-		
 		if (game.temp.value > 0) 
 			DrawTextureV(game.temp.hot_texture, game.planet.pos,
 				(Color){.r = 255, .g = 255, .b = 255, .a = game.temp.value});

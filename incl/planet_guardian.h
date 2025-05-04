@@ -10,6 +10,8 @@
 # define SCREEN_WIDTH 1000
 # define SCREEN_HEIGHT 1000
 
+# define MAX_HEALTH 20
+
 # define MAX_ASTEROIDS 10
 # define MAX_ASTEROID_SPEED 5.0f
 # define MIN_ASTEROID_RADIUS 10.0f
@@ -26,6 +28,13 @@ typedef enum gamestate
     GAME,
     END
 } state_t;
+
+typedef enum losestate 
+{
+    METEORS,
+    HEAT,
+    COLD
+} losestate_t;
 
 typedef struct sprite
 {
@@ -61,7 +70,6 @@ typedef struct temp {
 
 typedef struct game
 {
-    unsigned int health;
     sprite_t   planet;
     shield_t   shield;
     sprite_t   asteroid[MAX_ASTEROIDS];
@@ -75,6 +83,7 @@ typedef struct game
 	int max_health;
     int current_health;
     state_t state;
+    losestate_t lose_reason;
 } game_t;
 
 extern game_t game;
