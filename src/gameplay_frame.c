@@ -2,6 +2,7 @@
 
 void gameplay_frame()
 {
+	game.time_since_live += GetFrameTime();
 	// --- Calculate Shield Collision Circles ---
 	float orbitRadius = game.planet.radius + 50.0f;
 	Vector2 planetCenter = game.planet.center_pos;
@@ -53,6 +54,8 @@ void gameplay_frame()
 				game.state = END;
 				game.lose_reason = METEORS;
 				game.time_since_death = 0;
+
+				//game.time_since_live = GetFrameTime() - game.time_since_live;
 				return ;
 			};
 			game.asteroid[i] = initialize_asteroid(game.asteroid[i]);

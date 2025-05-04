@@ -11,7 +11,7 @@ void initialize_game()
 	game.shield.spin_speed = 3.0f;
 	game.temp.interval = 0.15f;
 	game.shadow.interval = 0.15f;
-
+	game.time_since_live = GetFrameTime();
 	game.planet.pos.x = (SCREEN_WIDTH - game.planet.texture.width) / 2.0f;
 	game.planet.pos.y = (SCREEN_HEIGHT - game.planet.texture.height) / 2.0f;
 	game.planet.center_pos.x = game.planet.pos.x + game.planet.texture.width / 2.0f;
@@ -42,6 +42,7 @@ int main(void)
 					gameplay_frame();
 					break;
 				case END:
+
 					deathScreen();
 			}
 	}
