@@ -46,6 +46,7 @@ typedef struct sprite
     Vector2     center_pos;
     bool        is_inside_screen;
 	float       speed;
+    float       rotation;
 } sprite_t;
 
 typedef struct shield {
