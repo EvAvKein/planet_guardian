@@ -27,7 +27,7 @@ void gameplay_frame()
 	if (IsKeyPressed(KEY_SPACE))
 			game.shield.direction = -game.shield.direction;
 	float deltaTime = GetFrameTime();
-	game.shield.angle += deltaTime * spin_speed * game.shield.direction; // Get time elapsed since last frame
+	game.shield.angle += deltaTime * game.shield.spin_speed * game.shield.direction; // Get time elapsed since last frame
 	// if (IsKeyDown(KEY_LEFT))
 	// 	shieldAngle -= deltaTime * 3.0f;  // Get time elapsed since last frame
 

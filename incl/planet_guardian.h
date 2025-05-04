@@ -7,8 +7,8 @@
 # include "raylib.h"
 # include "raymath.h"
 
-# define SCREEN_WIDTH 2000
-# define SCREEN_HEIGHT 2000
+# define SCREEN_WIDTH 1000
+# define SCREEN_HEIGHT 1000
 
 # define MAX_HEALTH 5
 
@@ -23,7 +23,6 @@
 # define MAX_TEMP 255
 # define MIN_TEMP -255
 
-# define spin_speed 3.0f
 typedef enum gamestate 
 {
     START,
@@ -53,6 +52,7 @@ typedef struct shield {
     sprite_t    sprite;
     float       angle;
     int         direction;
+	float		spin_speed;
 } shield_t;
 
 typedef struct shadow {
