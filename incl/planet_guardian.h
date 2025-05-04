@@ -19,10 +19,11 @@
 # define GRAVITYPULL_SCALE 0.000006f
 # define DIRECTION_CIRCLE_SIZE_TIMES_PLANET 6
 
-# define TEMP_CHANGE 10 
+# define TEMP_CHANGE 7 
 # define MAX_TEMP 255
 # define MIN_TEMP -255
 
+# define spin_speed 3.0f
 typedef enum gamestate 
 {
     START,
