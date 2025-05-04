@@ -69,10 +69,12 @@ typedef struct game
     shadow_t   shadow;
     Texture2D  background;
     Font        font;
-    state_t    state;
     Texture2D   logo;
     Texture2D   menu;
     Texture2D   asteroid_textures[4];
+	int max_health;
+    int current_health;
+    state_t state;
 } game_t;
 
 extern game_t game;

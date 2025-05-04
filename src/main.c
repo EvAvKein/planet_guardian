@@ -27,7 +27,9 @@ int main(void)
 	SetTargetFPS(60);
 
 	textureLoader();
-
+	game.max_health = 5;
+    game.current_health = game.max_health;
+    game.state = GAME;
 	initialize_game();	
 	initialize_all_asteroids();
 	InitAudioDevice();
