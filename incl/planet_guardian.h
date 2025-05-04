@@ -72,6 +72,8 @@ typedef struct sound
 {
     Sound       shield;
     Sound       theme;
+	Sound		asteroid;
+	Sound		earth;
 } sound_t;
 
 
@@ -122,6 +124,8 @@ void check_colliding_asteroids();
 void initialize_out_of_bounds_asteroids();
 void update_planet_condition(float delta_time, float shieldAngle);
 void play_shield_sound();
+void play_earth_collision();
+void play_asteroid_collision();
 void draw_red_shield(float delta_time);
 void draw_repeat_background(int	screen_width, int screen_height);
 
