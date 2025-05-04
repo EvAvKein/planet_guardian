@@ -23,12 +23,15 @@ void textureLoader()
 	game.shield.sprite.radius = texture6.height / 2.0f;
 	game.logo = LoadTexture("assets/graphics/logo_transparent.png");
 	game.menu = LoadTexture("assets/graphics/menu_background.png");
-	
+	game.asteroid_textures[0] = LoadTexture("assets/graphics/asteroid.png");	
+	game.asteroid_textures[1] = LoadTexture("assets/graphics/asteroid2.png");	
+	game.asteroid_textures[2] = LoadTexture("assets/graphics/asteroid3.png");	
+	game.asteroid_textures[3] = LoadTexture("assets/graphics/asteroid4.png");	
 	int i = 0;
-	image = LoadImage("assets/graphics/asteroid2.png");
-	Texture2D asteroid_texture = LoadTextureFromImage(image);
+	Texture2D asteroid_texture;
 	while (i < MAX_ASTEROIDS)
 	{
+		asteroid_texture = random_asteroid_texture();
 		game.asteroid[i].texture = asteroid_texture;
 		game.asteroid[i].radius = asteroid_texture.height / 2.0f;
 		i++;
