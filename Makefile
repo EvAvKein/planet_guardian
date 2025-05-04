@@ -1,9 +1,18 @@
 NAME := planet_guardian
 
 SRC_DIR := src
-SRC_FILES := main.c movement.c initialize_asteroids.c collision_detection.c draw_sprites.c draw_shield.c \
-	planet_condition.c text.c
-
+SRC_FILES := main.c \
+             textures.c \
+             gameplay_frame.c \
+             movement.c \
+			 initialize_asteroids.c \
+			 collision_detection.c \
+			 draw_sprites.c \
+			 draw_shield.c \
+			 planet_condition.c \
+			 text.c \
+			 sounds.c \
+			 state.c
 INCLUDE_DIR := incl
 
 LIB_FILES := raylib5_6.a
@@ -30,6 +39,9 @@ fclean: clean
 	@rm -f $(NAME)
 
 re: fclean all
+
+run: $(NAME)
+	./$(NAME)
 
 neat: $(NAME) clean
 	clear

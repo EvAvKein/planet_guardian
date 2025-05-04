@@ -1,5 +1,5 @@
 #include "planet_guardian.h"
-#include <stdio.h>
+
 Vector2 moveTowardsWithGravity(Vector2 current, Vector2 direction, int speed, Vector2 planetCenter)
 {
     // Direction and distance to planet center
@@ -27,7 +27,7 @@ Vector2 moveTowardsWithGravity(Vector2 current, Vector2 direction, int speed, Ve
 Vector2 generateRandomDir(Vector2 current)
 {
     Vector2 center = game.planet.center_pos;
-    float radius = game.planet.radius * 2;
+    float radius = game.planet.radius * DIRECTION_CIRCLE_SIZE_TIMES_PLANET;
 
     // Arvot kulman asteina 0–90 ja muunnetaan radiaaneiksi
     float randomAngle = ((float)rand() / (float)RAND_MAX) * 360.0f;
@@ -50,7 +50,7 @@ Vector2 generateAsteroidPos()
     int edge = GetRandomValue(0, 3);  // 0 = top, 1 = right, 2 = bottom, 3 = left
     Vector2 position;
 
-    float edgeMargin = 1; // Puskurietäisyys ruudun ulkopuolelle
+    float edgeMargin = 50; // Puskurietäisyys ruudun ulkopuolelle
 
     switch (edge)
     {

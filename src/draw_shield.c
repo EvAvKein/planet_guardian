@@ -1,8 +1,4 @@
-
 #include "planet_guardian.h"
-
-
-
 
 void draw_shield(float angle)
 {
@@ -15,16 +11,31 @@ void draw_shield(float angle)
         center.y + sinf(angle) * orbitRadius
     };
 
-    Rectangle sourceRec = {0, 0, (float)game.shield.texture.width,
-                           (float)game.shield.texture.height};
+    Rectangle sourceRec = {0, 0, (float)game.shield.sprite.texture.width,
+                           (float)game.shield.sprite.texture.height};
     Rectangle destRec = {shieldCenterPos.x, shieldCenterPos.y,
-                        (float)game.shield.texture.width,
-                        (float)game.shield.texture.height};
-    Vector2 origin = {(float)game.shield.texture.width / 2.0f,
-                      (float)game.shield.texture.height / 2.0f};
+                        (float)game.shield.sprite.texture.width,
+                        (float)game.shield.sprite.texture.height};
+    Vector2 origin = {(float)game.shield.sprite.texture.width / 2.0f,
+                      (float)game.shield.sprite.texture.height / 2.0f};
 
     float shieldRotation = angle * RAD2DEG + 90.0f;
 
-    DrawTexturePro(game.shield.texture, sourceRec, destRec, origin,
+    DrawTexturePro(game.shield.sprite.texture, sourceRec, destRec, origin,
                    shieldRotation, WHITE);
 }
+
+void draw_red_shield(float delta_time)
+{
+	// Update temperature timer
+    float   timer;
+
+    timer = 0.0f;
+    while (timer < 0.5f)
+    {
+        game.shield.sprite.texture = LoadTexture("/assets/graphics/shield_red.png");
+        timer += delta_time;
+    }
+        game.shield.sprite.texture = LoadTexture("/assets/graphics/shield.png");
+}
+
