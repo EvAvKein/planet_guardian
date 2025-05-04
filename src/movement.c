@@ -1,5 +1,5 @@
 #include "planet_guardian.h"
-#include <stdio.h>
+
 Vector2 moveTowardsWithGravity(Vector2 current, Vector2 direction, int speed, Vector2 planetCenter)
 {
     // Direction and distance to planet center
