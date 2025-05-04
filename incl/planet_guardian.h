@@ -23,7 +23,6 @@
 # define MAX_TEMP 255
 # define MIN_TEMP -255
 
-# define spin_speed 3.0f
 typedef enum gamestate 
 {
     START,
@@ -53,6 +52,7 @@ typedef struct shield {
     sprite_t    sprite;
     float       angle;
     int         direction;
+	float		spin_speed;
 } shield_t;
 
 typedef struct shadow {
