@@ -36,11 +36,18 @@ void deathScreen() {
     //     WHITE);
 
     const char* restartText = "Press [SPACE] to Restart";
-    Vector2 restartTextSize = MeasureTextEx(game.font, restartText, game.font.baseSize, 1.0f);
+    Vector2 restartTextSize = MeasureTextEx(game.font, restartText, game.font.baseSize, 1.5f);
     DrawTextEx(game.font, restartText,
-        (Vector2){(GetScreenWidth() - restartTextSize.x) / 2.0f, (GetScreenHeight() - restartTextSize.y) / 2.0f + 40},
-        game.font.baseSize, 1.0f, WHITE);
+        (Vector2){(GetScreenWidth() - restartTextSize.x) / 2.0f, (GetScreenHeight() - restartTextSize.y) / 2.0f + 100},
+        game.font.baseSize, 1.0f, GRAY);
+    char scoreText[100];
+	snprintf(scoreText, sizeof(scoreText), "You survived for %.2f seconds", game.time_since_live);
 
+	Vector2 scoreTextSize = MeasureTextEx(game.font, scoreText, game.font.baseSize, 1.0f);
+	DrawTextEx(game.font, scoreText,
+    	(Vector2){(GetScreenWidth() - scoreTextSize.x) / 2.0f, (GetScreenHeight() - scoreTextSize.y) / 2.0f + 40},
+	    game.font.baseSize, 1.0f, WHITE);
+    
     game.time_since_death += GetFrameTime();
     if (game.time_since_death > 1.0f && IsKeyPressed(KEY_SPACE)) {
         PlaySound(game.sound.theme);
@@ -49,6 +56,7 @@ void deathScreen() {
         game.shield.angle = 0.0f;
         game.state = GAME;
         game.temp.value = 0;
+	game.time_since_live = 0;
     }
     EndDrawing();
 }

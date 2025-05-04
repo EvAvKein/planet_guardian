@@ -105,6 +105,7 @@ typedef struct game
     losestate_t lose_reason;
     // Texture2D   lose_textures[3];
     float       time_since_death;
+    float	time_since_live;
 } game_t;
 
 extern game_t game;
