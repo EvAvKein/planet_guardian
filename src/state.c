@@ -24,7 +24,9 @@ void deathScreen() {
     DrawTextEx(game.font, restartText,
         (Vector2){(GetScreenWidth() - restartTextSize.x) / 2.0f, (GetScreenHeight() - restartTextSize.y) / 2.0f + 40},
         game.font.baseSize, 1.0f, WHITE);
-    if (IsKeyPressed(KEY_SPACE)) {
+
+    game.time_since_death += GetFrameTime();
+    if (game.time_since_death > 1.0f && IsKeyPressed(KEY_SPACE)) {
         initialize_all_asteroids();
         game.current_health = MAX_HEALTH;
         game.shield.angle = 0.0f;

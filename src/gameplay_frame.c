@@ -47,6 +47,7 @@ void gameplay_frame()
 			{
 				game.state = END;
 				game.lose_reason = METEORS;
+				game.time_since_death = 0;
 				return ;
 			};
 			game.asteroid[i] = initialize_asteroid(game.asteroid[i]);
@@ -86,12 +87,14 @@ void gameplay_frame()
 		{
 			game.state = END;
 			game.lose_reason = HEAT;
+			game.time_since_death = 0;
 			return ;
 		}
 		if (game.temp.value == MIN_TEMP)
 		{
 			game.state = END;
 			game.lose_reason = COLD;
+			game.time_since_death = 0;
 			return ;
 		}
 		
