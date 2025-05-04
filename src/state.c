@@ -5,8 +5,10 @@ void drawMenu() {
     ClearBackground(BLACK);
     DrawTexturePro(game.menu, (Rectangle){0, 0, 256, 256}, (Rectangle){0, 0, GetScreenHeight(), GetScreenWidth()},(Vector2){0, 0}, 0, WHITE);
     printp("PRESS SPACE", 300, 600, 1.0f, RED);
-    if(IsKeyPressed(KEY_SPACE))
+    if(IsKeyPressed(KEY_SPACE)) {
         game.state = GAME;
+        playTheme();
+    }
     EndDrawing();
 }
 
