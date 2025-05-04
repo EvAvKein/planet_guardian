@@ -17,7 +17,7 @@ void textureLoader()
 		.height = shadow_image.height, .width = shadow_image.width / 2});
 	game.shadow.texture = LoadTextureFromImage(shadow_image);
 	UnloadImage(shadow_image);
-	Image bg_image = LoadImage("assets/graphics/background_1-64x64.png");
+	Image bg_image = LoadImage("assets/graphics/background_2-64x64.png");
 	ImageResize(&bg_image, bg_image.width * bg_scale, bg_image.height * bg_scale);
 	game.background = LoadTextureFromImage(bg_image);
 	game.shield.sprite.texture = LoadTexture("assets/graphics/shield.png");

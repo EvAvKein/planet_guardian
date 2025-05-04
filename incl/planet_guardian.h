@@ -18,10 +18,11 @@
 # define MAX_ASTEROID_RADIUS 20.0f
 # define GRAVITYPULL_SCALE 0.0001f
 
-# define TEMP_CHANGE 10 
+# define TEMP_CHANGE 7 
 # define MAX_TEMP 255
 # define MIN_TEMP -255
 
+# define spin_speed 3.0f
 typedef enum gamestate 
 {
     START,
