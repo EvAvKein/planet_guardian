@@ -86,6 +86,7 @@ typedef struct game
     int current_health;
     state_t state;
     losestate_t lose_reason;
+    // Texture2D   lose_textures[3];
     float       time_since_death;
 } game_t;
 
@@ -115,5 +116,7 @@ void update_planet_condition(float delta_time, float shieldAngle);
 void play_shield_sound();
 void draw_red_shield(float delta_time);
 void draw_repeat_background(int	screen_width, int screen_height);
+
+char *ft_strjoin(char const *s1, char const *s2);
 
 #endif
