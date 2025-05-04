@@ -8,8 +8,8 @@ void textureLoader()
 	game.planet.texture = texture;
 	game.planet.radius = texture.height / 2.0f;
 	UnloadImage(image);
-	Texture2D texture_zero = LoadTexture("assets/graphics/earth_snow.png");
-	game.cold.texture = texture_zero;
+	game.temp.hot_texture = LoadTexture("assets/graphics/earth_dry.png");
+	game.temp.cold_texture = LoadTexture("assets/graphics/earth_snow.png");
 	image = LoadImage("assets/graphics/earth_normal.png");
 	ImageCrop(&image, (Rectangle){
 		.height = image.height, .width = image.width / 2});
@@ -21,7 +21,9 @@ void textureLoader()
 	Texture2D texture6 = LoadTextureFromImage(image);
 	game.shield.sprite.texture = texture6;
 	game.shield.sprite.radius = texture6.height / 2.0f;
-
+	game.logo = LoadTexture("assets/graphics/logo_transparent.png");
+	game.menu = LoadTexture("assets/graphics/menu_background.png");
+	
 	int i = 0;
 	image = LoadImage("assets/graphics/asteroid2.png");
 	Texture2D asteroid_texture = LoadTextureFromImage(image);
@@ -42,5 +44,7 @@ void textureUnload()
 	{
 		UnloadTexture(game.asteroid[i].texture);
 	}
+	UnloadTexture(game.temp.hot_texture);
+	UnloadTexture(game.temp.cold_texture);
 	UnloadTexture(game.shield.sprite.texture);
 }

@@ -7,13 +7,14 @@ void initialize_game()
 	game.shield.angle = 0.0f;
 	game.shield.direction = 1;
 
-	game.cold.interval = 0.15f;
+	game.temp.interval = 0.15f;
 	game.shadow.interval = 0.15f;
 	
 	game.planet.pos.x = (SCREEN_WIDTH - game.planet.texture.width) / 2.0f;
 	game.planet.pos.y = (SCREEN_HEIGHT - game.planet.texture.height) / 2.0f;
 	game.planet.center_pos.x = game.planet.pos.x + game.planet.texture.width / 2.0f;
 	game.planet.center_pos.y = game.planet.pos.y + game.planet.texture.width / 2.0f;
+	game.state = START;
 	// Aim to the middle of the planet
 	// calculating the target to the middle
 }
@@ -32,9 +33,19 @@ int main(void)
 	InitAudioDevice();
 	while (!WindowShouldClose())
 	{
-		gameplay_frame();
+		BeginDrawing();
+			switch(game.state) {
+				case START:
+					drawMenu();
+					break;
+				case GAME:
+					gameplay_frame();
+					break;
+				case END:
+					deathScreen();
+			}
+		EndDrawing();
 	}
-
 	textureUnload();
 
 	CloseWindow();
