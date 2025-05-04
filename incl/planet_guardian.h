@@ -50,9 +50,13 @@ typedef struct sprite
 
 typedef struct shield {
     sprite_t    sprite;
+    Texture2D   red_shield_texture;
+    Texture2D   shield_texture;
     float       angle;
     int         direction;
 	float		spin_speed;
+    bool        shieldWasHit;
+    double      lastShieldHitTime;
 } shield_t;
 
 typedef struct shadow {
