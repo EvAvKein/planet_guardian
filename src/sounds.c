@@ -2,10 +2,14 @@
 
 void soundLoader()
 {
-    game.sound.shield = LoadSound("assets/audio/final/shield_collision.mp3");
-    game.sound.theme = LoadSound("assets/audio/final/theme.mp3");
+    game.sound.shield = LoadSound("assets/audio/final/shield_collision.wav");
+    game.sound.theme = LoadMusicStream("assets/audio/final/theme.mp3");
+	game.sound.earth = LoadSound("assets/audio/final/asteroid_collision.mp3");
 	game.sound.asteroid = LoadSound("assets/audio/final/asteroid_collision.mp3");
-	game.sound.earth = LoadSound("assets/audio/final/earth_collision.mp3");
+	SetMusicVolume(game.sound.theme, 0.4);
+	SetSoundVolume(game.sound.earth, 1);
+	SetSoundVolume(game.sound.asteroid, 0.8);
+	SetSoundVolume(game.sound.shield, 1);
 }
 
 void play_shield_sound()
@@ -15,7 +19,12 @@ void play_shield_sound()
 
 void playTheme()
 {
-    PlaySound(game.sound.theme);
+    PlayMusicStream(game.sound.theme);
+}
+
+void stopTheme()
+{
+    StopMusicStream(game.sound.theme);
 }
 
 void play_asteroid_collision()

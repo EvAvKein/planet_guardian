@@ -20,11 +20,8 @@
 # define DIRECTION_CIRCLE_SIZE_TIMES_PLANET 6
 # define SHIELD_RED_TIME 0.5f
 
-<<<<<<< HEAD
-# define TEMP_CHANGE 7
-=======
+
 # define TEMP_CHANGE 10
->>>>>>> d4661c5943550ace13cfd799b6351fba4cc3f558
 # define MAX_TEMP 255
 # define MIN_TEMP -255
 
@@ -83,7 +80,7 @@ typedef struct temp {
 typedef struct sound
 {
     Sound       shield;
-    Sound       theme;
+    Music       theme;
 	Sound		asteroid;
 	Sound		earth;
 } sound_t;
@@ -118,6 +115,7 @@ void gameplay_frame();
 void textureLoader();
 void textureUnload();
 
+void stopTheme();
 void playTheme();
 void drawMenu();
 void deathScreen();
@@ -143,3 +141,5 @@ void draw_red_shield(float delta_time);
 void draw_repeat_background(int	screen_width, int screen_height);
 
 char *ft_strjoin(char const *s1, char const *s2);
+
+#endif

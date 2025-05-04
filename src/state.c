@@ -15,7 +15,7 @@ void drawMenu() {
 void deathScreen() {
     BeginDrawing();
     DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(BLACK, 0.7f));
-        const char *gameOverText = ft_strjoin("LOST TO ", 
+        const char *gameOverText = ft_strjoin("LOST TO ",
             game.lose_reason == HEAT ? "HEAT"
             : game.lose_reason == COLD ? "COLDNESS"
             : "METEORS");
@@ -43,7 +43,7 @@ void deathScreen() {
 
     game.time_since_death += GetFrameTime();
     if (game.time_since_death > 1.0f && IsKeyPressed(KEY_SPACE)) {
-        PlaySound(game.sound.theme);
+        playTheme();
         initialize_all_asteroids();
         game.current_health = MAX_HEALTH;
         game.shield.angle = 0.0f;
