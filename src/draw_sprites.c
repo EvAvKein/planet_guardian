@@ -11,7 +11,20 @@ void draw_asteroids()
 	int i = 0;
 	while (i < MAX_ASTEROIDS)
 	{
-		DrawTextureV(game.asteroid[i].texture, game.asteroid[i].pos, WHITE);
+		Vector2 position = game.asteroid[i].center_pos;
+		Texture2D tex = game.asteroid[i].texture;
+		float rotation = game.asteroid[i].rotation;
+		DrawTexturePro(
+			tex,
+			(Rectangle){ 0, 0, tex.width, tex.height },
+			(Rectangle){ position.x, position.y, tex.width, tex.height },
+			(Vector2){ tex.width / 2.0f, tex.height / 2.0f }, // Origopiste keskelle
+			rotation,
+			WHITE);
+		if (i % 2 == 0)
+			game.asteroid[i].rotation += 90.0f * GetFrameTime(); // Myötäpäivään
+		else
+			game.asteroid[i].rotation -= 90.0f * GetFrameTime(); // Vastapäivään
 		i++;
 	}
 }
