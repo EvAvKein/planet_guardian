@@ -1,6 +1,4 @@
 #include "planet_guardian.h"
-#include "raylib.h"
-#include <stdio.h>
 
 bool check_collision(sprite_t sprite_a, sprite_t sprite_b)
 {

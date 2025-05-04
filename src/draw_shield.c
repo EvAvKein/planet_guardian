@@ -1,8 +1,4 @@
-
 #include "planet_guardian.h"
-
-
-
 
 void draw_shield(float angle)
 {

@@ -1,6 +1,5 @@
 #include "planet_guardian.h"
 
-
 void update_planet_condition(float delta_time, float shieldAngle)
 {
 	// Update temperature timer
@@ -42,5 +41,3 @@ void update_planet_condition(float delta_time, float shieldAngle)
 		game.shadow.rotation = (game.shadow.rotation + 1) % 360;
 	}
 }
-
-
