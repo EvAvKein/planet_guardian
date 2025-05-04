@@ -24,3 +24,18 @@ void draw_shield(float angle)
     DrawTexturePro(game.shield.sprite.texture, sourceRec, destRec, origin,
                    shieldRotation, WHITE);
 }
+
+void draw_red_shield(float delta_time)
+{
+	// Update temperature timer
+    float   timer;
+
+    timer = 0.0f;
+    while (timer < 0.5f)
+    {
+        game.shield.sprite.texture = LoadTexture("/assets/graphics/shield_red.png");
+        timer += delta_time;
+    }
+        game.shield.sprite.texture = LoadTexture("/assets/graphics/shield.png");
+}
+

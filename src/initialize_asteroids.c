@@ -1,6 +1,7 @@
 #include "planet_guardian.h"
+#include "raylib.h"
 
-Texture2D	 random_asteroid_texture()
+char	 *random_asteroid_texture()
 {
 	return game.asteroid_textures[rand() % 4];
 }
@@ -27,7 +28,13 @@ sprite_t initialize_asteroid(sprite_t asteroid)
 		asteroid.speed = GetRandomValue(1, MAX_ASTEROID_SPEED);
 		// CHANGE IF NEEDED THE DIRECTION
 		asteroid.radius = asteroid.texture.width / 2.0f;
-		asteroid.texture = random_asteroid_texture();
+		Image asteroid_image = LoadImage(random_asteroid_texture()); 
+		float scale = GetRandomValue(3, 10) * 0.1f;
+		ImageResize(&asteroid_image, asteroid_image.width * scale, asteroid_image.height * scale);
+		Texture2D asteroid_texture = LoadTextureFromImage(asteroid_image);
+		asteroid.texture = asteroid_texture;
+		asteroid.radius = asteroid_texture.height / 2.0f;
+		//asteroid.texture = random_asteroid_texture();
 	return (asteroid);
 
 }

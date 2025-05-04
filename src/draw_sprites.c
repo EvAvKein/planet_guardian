@@ -15,3 +15,19 @@ void draw_asteroids()
 		i++;
 	}
 }
+
+void draw_repeat_background(int	screen_width, int screen_height)
+{
+	Vector2 bg_pos = { 0, 0 };
+
+	while (bg_pos.y < screen_height)
+	{
+		bg_pos.x = 0;
+		while (bg_pos.x < screen_width)
+		{
+			DrawTextureV(game.background, bg_pos, WHITE);
+			bg_pos.x += game.background.width;
+		}
+		bg_pos.y += game.background.height;
+	}
+}
