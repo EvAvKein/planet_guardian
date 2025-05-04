@@ -27,7 +27,7 @@ Vector2 moveTowardsWithGravity(Vector2 current, Vector2 direction, int speed, Ve
 Vector2 generateRandomDir(Vector2 current)
 {
     Vector2 center = game.planet.center_pos;
-    float radius = game.planet.radius * 2;
+    float radius = game.planet.radius * DIRECTION_CIRCLE_SIZE_TIMES_PLANET;
 
     // Arvot kulman asteina 0–90 ja muunnetaan radiaaneiksi
     float randomAngle = ((float)rand() / (float)RAND_MAX) * 360.0f;

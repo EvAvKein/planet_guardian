@@ -46,5 +46,4 @@ void initialize_out_of_bounds_asteroids()
 			game.asteroid[i] = initialize_asteroid(game.asteroid[i]);
 		i++;
 	}
-	printf("Out of bounds\n");
 }
