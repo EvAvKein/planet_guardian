@@ -73,13 +73,14 @@ void gameplay_frame()
 	BeginDrawing();
 		ClearBackground(BLACK);
 
-		DrawTexturePro(game.background, (Rectangle){.x = 0, .y = 0,
-				.width = game.background.width, .height = game.background.height},
-			(Rectangle){.x = game.background.width, .y = game.background.height,
-				.width = SCREEN_WIDTH, .height = SCREEN_HEIGHT},
-			(Vector2){.x = game.background.width, .y = game.background.height},
-			0,
-			WHITE);
+		// DrawTexturePro(game.background, (Rectangle){.x = 0, .y = 0,
+		// 		.width = game.background.width, .height = game.background.height},
+		// 	(Rectangle){.x = game.background.width, .y = game.background.height,
+		// 		.width = SCREEN_WIDTH, .height = SCREEN_HEIGHT},
+		// 	(Vector2){.x = game.background.width, .y = game.background.height},
+		// 	0,
+		// 	WHITE);
+	draw_repeat_background(SCREEN_WIDTH, SCREEN_HEIGHT);
 
 		update_planet_condition(deltaTime, game.shield.angle);
 		if (game.temp.value == MAX_TEMP)

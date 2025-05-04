@@ -50,7 +50,7 @@ Vector2 generateAsteroidPos()
     int edge = GetRandomValue(0, 3);  // 0 = top, 1 = right, 2 = bottom, 3 = left
     Vector2 position;
 
-    float edgeMargin = 1; // Puskurietäisyys ruudun ulkopuolelle
+    float edgeMargin = 50; // Puskurietäisyys ruudun ulkopuolelle
 
     switch (edge)
     {

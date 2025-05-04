@@ -12,7 +12,7 @@
 
 # define MAX_HEALTH 20
 
-# define MAX_ASTEROIDS 10
+# define MAX_ASTEROIDS 1
 # define MAX_ASTEROID_SPEED 5.0f
 # define MIN_ASTEROID_RADIUS 10.0f
 # define MAX_ASTEROID_RADIUS 20.0f
@@ -79,7 +79,7 @@ typedef struct game
     Font        font;
     Texture2D   logo;
     Texture2D   menu;
-    Texture2D   asteroid_textures[4];
+    char   *asteroid_textures[4];
 	int max_health;
     int current_health;
     state_t state;
@@ -99,7 +99,7 @@ void printp(char *msg, float x, float y, float size, Color color);
 Vector2 moveTowardsWithGravity(Vector2 current, Vector2 direction, int speed, Vector2 planetCenter);
 Vector2 generateAsteroidPos();
 Vector2 generateRandomDir(Vector2 current);
-Texture2D random_asteroid_texture();
+char *random_asteroid_texture();
 void initialize_all_asteroids();
 sprite_t initialize_asteroid(sprite_t asteroid);
 Vector2 get_center_pos(sprite_t sprite);
@@ -110,5 +110,7 @@ void check_colliding_asteroids();
 void initialize_out_of_bounds_asteroids();
 void update_planet_condition(float delta_time, float shieldAngle);
 void play_shield_sound();
+void draw_red_shield(float delta_time);
+void draw_repeat_background(int	screen_width, int screen_height);
 
 #endif
