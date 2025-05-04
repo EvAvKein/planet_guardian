@@ -14,6 +14,9 @@ void deathScreen() {
     BeginDrawing();
     printp("YOU LOST.\n RETRY?", 400, 400, 1.0f, DARKPURPLE);
     if(IsKeyPressed(KEY_SPACE))
+    {
         game.state = GAME;
+        game.temp.value = 0;
+    }
     EndDrawing();
 }
