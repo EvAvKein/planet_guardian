@@ -4,9 +4,11 @@ void drawMenu() {
     BeginDrawing();
     ClearBackground(BLACK);
     DrawTexturePro(game.menu, (Rectangle){0, 0, 256, 256}, (Rectangle){0, 0, GetScreenHeight(), GetScreenWidth()},(Vector2){0, 0}, 0, WHITE);
-    printp("PRESS SPACE", 300, 600, 1.0f, RED);
-    if(IsKeyPressed(KEY_SPACE))
+    printp("PRESS SPACE", GetScreenWidth() * 0.5, GetScreenHeight() * 0.5, 1.0f, RED);
+    if(IsKeyPressed(KEY_SPACE)) {
         game.state = GAME;
+        playTheme();
+    }
     EndDrawing();
 }
 
@@ -41,6 +43,7 @@ void deathScreen() {
 
     game.time_since_death += GetFrameTime();
     if (game.time_since_death > 1.0f && IsKeyPressed(KEY_SPACE)) {
+        PlaySound(game.sound.theme);
         initialize_all_asteroids();
         game.current_health = MAX_HEALTH;
         game.shield.angle = 0.0f;

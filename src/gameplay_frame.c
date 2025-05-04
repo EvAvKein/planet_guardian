@@ -56,6 +56,7 @@ void gameplay_frame()
 				return ;
 			};
 			game.asteroid[i] = initialize_asteroid(game.asteroid[i]);
+			play_earth_collision();
 		}
 		game.asteroid[i].pos = moveTowardsWithGravity(game.asteroid[i].pos, game.asteroid[i].direction, game.asteroid[i].speed, game.planet.center_pos);
 
