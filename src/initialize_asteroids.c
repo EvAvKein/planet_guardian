@@ -25,7 +25,7 @@ sprite_t initialize_asteroid(sprite_t asteroid)
 		asteroid.center_pos = get_center_pos(asteroid);
 		// CHANGE THE DIRECTION
 		asteroid.direction = generateRandomDir(asteroid.pos);
-		asteroid.speed = GetRandomValue(15, MAX_ASTEROID_SPEED) * 0.1f;
+		asteroid.speed = GetRandomValue(MIN_ASTEROID_SPEED, MAX_ASTEROID_SPEED) * 0.01f;
 		// CHANGE IF NEEDED THE DIRECTION
 		asteroid.radius = asteroid.texture.width / 2.0f;
 		Image asteroid_image = LoadImage(random_asteroid_texture()); 
