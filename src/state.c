@@ -29,6 +29,7 @@ void deathScreen() {
         game.current_health = MAX_HEALTH;
         game.shield.angle = 0.0f;
         game.state = GAME;
+        game.temp.value = 0;
     }
     EndDrawing();
 }

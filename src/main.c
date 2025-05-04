@@ -4,8 +4,7 @@ game_t game;
 
 void initialize_game()
 {
-	game.max_health = MAX_HEALTH;
-  game.current_health = game.max_health;
+  	game.current_health = MAX_HEALTH;
 	
 	game.shield.angle = 0.0f;
 	game.shield.direction = 1;

@@ -10,7 +10,7 @@
 # define SCREEN_WIDTH 1000
 # define SCREEN_HEIGHT 1000
 
-# define MAX_HEALTH 20
+# define MAX_HEALTH 5
 
 # define MAX_ASTEROIDS 10
 # define MAX_ASTEROID_SPEED 5.0f
@@ -80,7 +80,6 @@ typedef struct game
     Texture2D   logo;
     Texture2D   menu;
     Texture2D   asteroid_textures[4];
-	int max_health;
     int current_health;
     state_t state;
     losestate_t lose_reason;
