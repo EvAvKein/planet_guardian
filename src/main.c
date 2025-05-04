@@ -11,7 +11,7 @@ void initialize_game()
 	game.shield.spin_speed = 3.0f;
 	game.temp.interval = 0.15f;
 	game.shadow.interval = 0.15f;
-	
+
 	game.planet.pos.x = (SCREEN_WIDTH - game.planet.texture.width) / 2.0f;
 	game.planet.pos.y = (SCREEN_HEIGHT - game.planet.texture.height) / 2.0f;
 	game.planet.center_pos.x = game.planet.pos.x + game.planet.texture.width / 2.0f;
@@ -23,15 +23,15 @@ void initialize_game()
 int main(void)
 {
 	srand(time(NULL));
-	
+
 	InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Planet Guardian");
 	SetTargetFPS(60);
-
 	textureLoader();
 
-	initialize_game();	
+	initialize_game();
 	initialize_all_asteroids();
 	InitAudioDevice();
+	soundLoader();
 	while (!WindowShouldClose())
 	{
 			switch(game.state) {

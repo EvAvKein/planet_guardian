@@ -19,18 +19,18 @@
 # define GRAVITYPULL_SCALE 0.000006f
 # define DIRECTION_CIRCLE_SIZE_TIMES_PLANET 6
 
-# define TEMP_CHANGE 7 
+# define TEMP_CHANGE 10
 # define MAX_TEMP 255
 # define MIN_TEMP -255
 
-typedef enum gamestate 
+typedef enum gamestate
 {
     START,
     GAME,
     END
 } state_t;
 
-typedef enum losestate 
+typedef enum losestate
 {
     METEORS,
     HEAT,
@@ -70,8 +70,19 @@ typedef struct temp {
     float       interval;
 } temp_t;
 
+typedef struct sound
+{
+    Sound       shield;
+    Sound       theme;
+	Sound		asteroid;
+	Sound		earth;
+} sound_t;
+
+
 typedef struct game
 {
+    unsigned int health;
+    sound_t    sound;
     sprite_t   planet;
     shield_t   shield;
     sprite_t   asteroid[MAX_ASTEROIDS];
@@ -97,8 +108,10 @@ void gameplay_frame();
 void textureLoader();
 void textureUnload();
 
+void playTheme();
 void drawMenu();
 void deathScreen();
+void soundLoader();
 void printp(char *msg, float x, float y, float size, Color color);
 Vector2 moveTowardsWithGravity(Vector2 current, Vector2 direction, int speed, Vector2 planetCenter);
 Vector2 generateAsteroidPos();
@@ -114,6 +127,8 @@ void check_colliding_asteroids();
 void initialize_out_of_bounds_asteroids();
 void update_planet_condition(float delta_time, float shieldAngle);
 void play_shield_sound();
+void play_earth_collision();
+void play_asteroid_collision();
 void draw_red_shield(float delta_time);
 void draw_repeat_background(int	screen_width, int screen_height);
 
