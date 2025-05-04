@@ -37,6 +37,11 @@ void gameplay_frame()
 	// int asteroid1;
 	// int asteroid2;
 	int i = 0;
+	if (game.shield.shieldWasHit && (GetTime() - game.shield.lastShieldHitTime > 0.5))
+	{
+		game.shield.sprite.texture = game.shield.shield_texture;
+		game.shield.shieldWasHit = false;
+	}
 	while (i < MAX_ASTEROIDS)
 	{
 		game.asteroid[i].center_pos.x = game.asteroid[i].pos.x + game.asteroid[i].radius;
@@ -64,6 +69,9 @@ void gameplay_frame()
 		{
 				play_shield_sound();
 				game.asteroid[i] = initialize_asteroid(game.asteroid[i]);
+				game.shield.sprite.texture = game.shield.red_shield_texture;
+				game.shield.lastShieldHitTime = GetTime();
+				game.shield.shieldWasHit = true;
 		}
 		i++;
 	}

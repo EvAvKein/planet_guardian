@@ -21,6 +21,8 @@ void textureLoader()
 	ImageResize(&bg_image, bg_image.width * bg_scale, bg_image.height * bg_scale);
 	game.background = LoadTextureFromImage(bg_image);
 	game.shield.sprite.texture = LoadTexture("assets/graphics/shield.png");
+	game.shield.red_shield_texture = LoadTexture("assets/graphics/shield_red.png");
+	game.shield.shield_texture = LoadTexture("assets/graphics/shield.png");
 	game.shield.sprite.radius = game.shield.sprite.texture.height / 2.0f;
 	game.logo = LoadTexture("assets/graphics/logo_transparent.png");
 	game.menu = LoadTexture("assets/graphics/menu_background.png");

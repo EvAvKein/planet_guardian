@@ -46,13 +46,18 @@ typedef struct sprite
     Vector2     center_pos;
     bool        is_inside_screen;
 	float       speed;
+    float       rotation;
 } sprite_t;
 
 typedef struct shield {
     sprite_t    sprite;
+    Texture2D   red_shield_texture;
+    Texture2D   shield_texture;
     float       angle;
     int         direction;
 	float		spin_speed;
+    bool        shieldWasHit;
+    double      lastShieldHitTime;
 } shield_t;
 
 typedef struct shadow {
