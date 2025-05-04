@@ -1,5 +1,10 @@
 #include "planet_guardian.h"
 
+Texture2D	 random_asteroid_texture()
+{
+	return game.asteroid_textures[rand() % 4];
+}
+
 void initialize_all_asteroids()
 {
 	int	i;
@@ -22,6 +27,7 @@ sprite_t initialize_asteroid(sprite_t asteroid)
 		asteroid.speed = GetRandomValue(1, MAX_ASTEROID_SPEED);
 		// CHANGE IF NEEDED THE DIRECTION
 		asteroid.radius = asteroid.texture.width / 2.0f;
+		asteroid.texture = random_asteroid_texture();
 	return (asteroid);
 
 }

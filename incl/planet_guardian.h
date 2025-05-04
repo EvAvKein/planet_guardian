@@ -72,6 +72,7 @@ typedef struct game
     state_t    state;
     Texture2D   logo;
     Texture2D   menu;
+    Texture2D   asteroid_textures[4];
 } game_t;
 
 extern game_t game;
@@ -87,6 +88,7 @@ void printp(char *msg, float x, float y, float size, Color color);
 Vector2 moveTowardsWithGravity(Vector2 current, Vector2 direction, int speed, Vector2 planetCenter);
 Vector2 generateAsteroidPos();
 Vector2 generateRandomDir(Vector2 current);
+Texture2D random_asteroid_texture();
 void initialize_all_asteroids();
 sprite_t initialize_asteroid(sprite_t asteroid);
 Vector2 get_center_pos(sprite_t sprite);
