@@ -23,11 +23,15 @@ void update_planet_condition(float delta_time, float shieldAngle)
 		// Adjust temperature level based on shield alignment
 		if (diff > 90.0f)
 		{
+			if (game.temp.value + TEMP_CHANGE >= MAX_TEMP)
+				game.temp.value = MAX_TEMP;
 			if (game.temp.value < MAX_TEMP)
 				game.temp.value += TEMP_CHANGE;
 		}
 		else
 		{
+			if (game.temp.value - TEMP_CHANGE <= MIN_TEMP)
+				game.temp.value = MIN_TEMP;
 			if (game.temp.value > MIN_TEMP)
 				game.temp.value -= TEMP_CHANGE;
 		}

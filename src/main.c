@@ -4,6 +4,9 @@ game_t game;
 
 void initialize_game()
 {
+	game.max_health = MAX_HEALTH;
+  game.current_health = game.max_health;
+	
 	game.shield.angle = 0.0f;
 	game.shield.direction = 1;
 
@@ -14,7 +17,6 @@ void initialize_game()
 	game.planet.pos.y = (SCREEN_HEIGHT - game.planet.texture.height) / 2.0f;
 	game.planet.center_pos.x = game.planet.pos.x + game.planet.texture.width / 2.0f;
 	game.planet.center_pos.y = game.planet.pos.y + game.planet.texture.width / 2.0f;
-	game.state = START;
 	// Aim to the middle of the planet
 	// calculating the target to the middle
 }
@@ -27,9 +29,7 @@ int main(void)
 	SetTargetFPS(60);
 
 	textureLoader();
-	game.max_health = 5;
-    game.current_health = game.max_health;
-    game.state = GAME;
+
 	initialize_game();	
 	initialize_all_asteroids();
 	InitAudioDevice();
