@@ -20,7 +20,7 @@
 # define DIRECTION_CIRCLE_SIZE_TIMES_PLANET 6
 # define SHIELD_RED_TIME 0.5f
 
-# define TEMP_CHANGE 10
+# define TEMP_CHANGE 7
 # define MAX_TEMP 255
 # define MIN_TEMP -255
 
