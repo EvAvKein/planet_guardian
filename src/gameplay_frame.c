@@ -2,6 +2,7 @@
 
 void gameplay_frame()
 {
+    UpdateMusicStream(game.sound.theme);
 	// --- Calculate Shield Collision Circles ---
 	float orbitRadius = game.planet.radius + 50.0f;
 	Vector2 planetCenter = game.planet.center_pos;
@@ -107,7 +108,7 @@ void gameplay_frame()
 			game.time_since_death = 0;
 			return ;
 		}
-		
+
             float healthBarWidthMax = 150.0f;
             float healthBarHeight = 25.0f;
             Vector2 healthBarPos = { 10.0f, 10.0f };
@@ -129,10 +130,10 @@ void gameplay_frame()
             DrawRectangleLinesEx((Rectangle){healthBarPos.x, healthBarPos.y, healthBarWidthMax, healthBarHeight}, 2.0f, BLACK);
 
 		DrawTextureV(game.planet.texture, game.planet.pos, WHITE);
-		if (game.temp.value > 0) 
+		if (game.temp.value > 0)
 			DrawTextureV(game.temp.hot_texture, game.planet.pos,
 				(Color){.r = 255, .g = 255, .b = 255, .a = game.temp.value});
-		else if (game.temp.value < 0) 
+		else if (game.temp.value < 0)
 			DrawTextureV(game.temp.cold_texture, game.planet.pos,
 				(Color){.r = 255, .g = 255, .b = 255, .a = -game.temp.value});
 
