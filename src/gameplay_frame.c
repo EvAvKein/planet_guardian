@@ -4,7 +4,8 @@
 void gameplay_frame()
 {
 	game.time_since_live += GetFrameTime();
-    UpdateMusicStream(game.sound.theme);
+
+  UpdateMusicStream(game.sound.theme);
 	// --- Calculate Shield Collision Circles ---
 	float orbitRadius = game.planet.radius + 50.0f;
 	Vector2 planetCenter = game.planet.center_pos;

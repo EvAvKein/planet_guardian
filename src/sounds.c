@@ -11,6 +11,7 @@ void soundLoader()
 	SetSoundVolume(game.sound.asteroid, 0.8);
 	SetSoundVolume(game.sound.shield, 1);
 }
+
 void play_shield_sound()
 {
     PlaySound(game.sound.shield);

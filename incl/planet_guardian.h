@@ -24,7 +24,6 @@
 # define TEMP_CHANGE 8.5f 
 # define SHIELD_RED_TIME 0.15f
 
-
 # define MAX_TEMP 255
 # define MIN_TEMP -255
 
@@ -60,7 +59,7 @@ typedef struct shield {
     Texture2D   shield_texture;
     float       angle;
     int         direction;
-	float		spin_speed;
+    float	spin_speed;
     bool        shieldWasHit;
     double      lastShieldHitTime;
 } shield_t;
