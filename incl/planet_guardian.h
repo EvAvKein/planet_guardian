@@ -7,8 +7,8 @@
 # include "raylib.h"
 # include "raymath.h"
 
-# define SCREEN_WIDTH 2000
-# define SCREEN_HEIGHT 2000
+# define SCREEN_WIDTH 1000
+# define SCREEN_HEIGHT 1000
 
 # define MAX_HEALTH 5
 
