@@ -6,7 +6,7 @@ void soundLoader()
     game.sound.theme = LoadMusicStream("assets/audio/final/theme.mp3");
 	game.sound.earth = LoadSound("assets/audio/final/asteroid_collision.mp3");
 	game.sound.asteroid = LoadSound("assets/audio/final/asteroid_collision.mp3");
-	SetMusicVolume(game.sound.theme, 0.4);
+	SetMusicVolume(game.sound.theme, 0.2);
 	SetSoundVolume(game.sound.earth, 1);
 	SetSoundVolume(game.sound.asteroid, 0.8);
 	SetSoundVolume(game.sound.shield, 1);
