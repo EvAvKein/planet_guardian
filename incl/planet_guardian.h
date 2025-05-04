@@ -83,6 +83,7 @@ typedef struct game
     int current_health;
     state_t state;
     losestate_t lose_reason;
+    float       time_since_death;
 } game_t;
 
 extern game_t game;
