@@ -7,7 +7,7 @@ void initialize_game()
 	game.shield.angle = 0.0f;
 	game.shield.direction = 1;
 
-	game.cold.interval = 0.15f;
+	game.temp.interval = 0.15f;
 	game.shadow.interval = 0.15f;
 	
 	game.planet.pos.x = (SCREEN_WIDTH - game.planet.texture.width) / 2.0f;

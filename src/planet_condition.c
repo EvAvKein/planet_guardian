@@ -3,11 +3,11 @@
 
 void update_planet_condition(float delta_time, float shieldAngle)
 {
-	// Update cold timer
-	game.cold.elapsed += delta_time;
-	if (game.cold.elapsed > game.cold.interval)
+	// Update temperature timer
+	game.temp.elapsed += delta_time;
+	if (game.temp.elapsed > game.temp.interval)
 	{
-		game.cold.elapsed -= game.cold.interval;
+		game.temp.elapsed -= game.temp.interval;
 
 		// Convert shield angle from radians to degrees
 		float shieldDeg = fmodf(shieldAngle * (180.0f / 3.141592653), 360.0f);
@@ -21,17 +21,16 @@ void update_planet_condition(float delta_time, float shieldAngle)
 		float diff = fabsf(shadowDeg - shieldDeg);
 		if (diff > 180.0f) diff = 360.0f - diff;
 
-		// Adjust cold level based on shield alignment
-		if (diff < 90.0f)
+		// Adjust temperature level based on shield alignment
+		if (diff > 90.0f)
 		{
-			if (game.cold.value < MAX_TEMP - TEMP_CHANGE)
-				game.cold.value += TEMP_CHANGE;
+			if (game.temp.value < MAX_TEMP)
+				game.temp.value += TEMP_CHANGE;
 		}
 		else
 		{
-			
-			if (game.cold.value > MIN_TEMP + TEMP_CHANGE)
-				game.cold.value -= TEMP_CHANGE;
+			if (game.temp.value > MIN_TEMP)
+				game.temp.value -= TEMP_CHANGE;
 		}
 	}
 

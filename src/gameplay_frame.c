@@ -42,7 +42,11 @@ void gameplay_frame()
 		game.asteroid[i].center_pos.x = game.asteroid[i].pos.x + game.asteroid[i].radius;
 		game.asteroid[i].center_pos.y = game.asteroid[i].pos.y + game.asteroid[i].radius;
 		if (CheckCollisionCircles(game.planet.center_pos, game.planet.radius, game.asteroid[i].center_pos, game.asteroid[i].radius))
+		{
+			if (!--game.health)
+				printf("lOST\n");
 			game.asteroid[i] = initialize_asteroid(game.asteroid[i]);
+		}
 		game.asteroid[i].pos = moveTowardsWithGravity(game.asteroid[i].pos, game.planet.center_pos, game.asteroid[i].speed, game.planet.center_pos);
 
 		if (CheckCollisionCircles(game.asteroid[i].center_pos, game.asteroid[i].radius, shieldCircle1Center, shieldSegmentRadius) ||
@@ -76,8 +80,13 @@ void gameplay_frame()
 
 		update_planet_condition(deltaTime, game.shield.angle);
 		DrawTextureV(game.planet.texture, game.planet.pos, WHITE);
-		DrawTextureV(game.cold.texture, game.planet.pos,
-			(Color){.r = 255, .g = 255, .b = 255, .a = game.cold.value});
+		
+		if (game.temp.value > 0) 
+			DrawTextureV(game.temp.hot_texture, game.planet.pos,
+				(Color){.r = 255, .g = 255, .b = 255, .a = game.temp.value});
+		else if (game.temp.value < 0) 
+			DrawTextureV(game.temp.cold_texture, game.planet.pos,
+				(Color){.r = 255, .g = 255, .b = 255, .a = -game.temp.value});
 
 		DrawTexturePro(game.shadow.texture,
 			(Rectangle){.x = 0, .y = 0,
