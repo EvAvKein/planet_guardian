@@ -7,16 +7,17 @@
 # include "raylib.h"
 # include "raymath.h"
 
-# define SCREEN_WIDTH 1000
-# define SCREEN_HEIGHT 1000
+# define SCREEN_WIDTH 2000
+# define SCREEN_HEIGHT 2000
 
 # define MAX_HEALTH 5
 
-# define MAX_ASTEROIDS 5
-# define MAX_ASTEROID_SPEED 3.0f
+# define MAX_ASTEROIDS 15
+# define MAX_ASTEROID_SPEED 10.0f
 # define MIN_ASTEROID_RADIUS 10.0f
 # define MAX_ASTEROID_RADIUS 20.0f
-# define GRAVITYPULL_SCALE 0.0001f
+# define GRAVITYPULL_SCALE 0.000006f
+# define DIRECTION_CIRCLE_SIZE_TIMES_PLANET 6
 
 # define TEMP_CHANGE 10 
 # define MAX_TEMP 255
