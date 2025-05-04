@@ -1,4 +1,5 @@
 #include "planet_guardian.h"
+#include "raylib.h"
 
 void gameplay_frame()
 {
@@ -24,6 +25,7 @@ void gameplay_frame()
 	shieldSegmentRadius = game.shield.sprite.texture.width * 0.12f;
 	Vector2 shieldCircle5Center = Vector2Add(shieldMidPoint, Vector2Scale(tangentDir, -shieldSegmentOffset * 0.7));
 	Vector2 shieldCircle6Center = Vector2Add(shieldMidPoint, Vector2Scale(tangentDir, shieldSegmentOffset * 0.7));
+	Rectangle screen_collider = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
 
 
 	if (IsKeyPressed(KEY_SPACE))
@@ -46,6 +48,10 @@ void gameplay_frame()
 	}
 	while (i < MAX_ASTEROIDS)
 	{
+		if (CheckCollisionCircleRec(game.asteroid[i].center_pos, game.asteroid[i].radius, screen_collider))
+			game.asteroid[i].is_inside_screen = true;
+		else
+			game.asteroid[i].is_inside_screen = false;
 		game.asteroid[i].center_pos.x = game.asteroid[i].pos.x + game.asteroid[i].radius;
 		game.asteroid[i].center_pos.y = game.asteroid[i].pos.y + game.asteroid[i].radius;
 		if (CheckCollisionCircles(game.planet.center_pos, game.planet.radius, game.asteroid[i].center_pos, game.asteroid[i].radius))
