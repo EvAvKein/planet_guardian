@@ -94,6 +94,21 @@ void gameplay_frame()
 			game.lose_reason = COLD;
 			return ;
 		}
+		
+            float healthBarWidthMax = 150.0f;
+            float healthBarHeight = 25.0f;
+            Vector2 healthBarPos = { 10.0f, 10.0f };
+
+            float healthRatio = 0.0f;
+            if (MAX_HEALTH > 0) {
+                 healthRatio = (float)game.current_health / (float)MAX_HEALTH;
+            }
+            float currentHealthBarWidth = healthBarWidthMax * healthRatio;
+            if (currentHealthBarWidth < 0) currentHealthBarWidth = 0;
+
+            DrawRectangleV(healthBarPos, (Vector2){healthBarWidthMax, healthBarHeight}, DARKGRAY);
+            DrawRectangleV(healthBarPos, (Vector2){currentHealthBarWidth, healthBarHeight}, GREEN);
+            DrawRectangleLinesEx((Rectangle){healthBarPos.x, healthBarPos.y, healthBarWidthMax, healthBarHeight}, 2.0f, BLACK);
 
 		DrawTextureV(game.planet.texture, game.planet.pos, WHITE);
 		if (game.temp.value > 0) 
