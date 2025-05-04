@@ -24,7 +24,6 @@
 # define TEMP_CHANGE 8.5f 
 # define SHIELD_RED_TIME 0.15f
 
-
 # define MAX_TEMP 255
 # define MIN_TEMP -255
 
