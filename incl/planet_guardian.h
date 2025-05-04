@@ -18,8 +18,13 @@
 # define MAX_ASTEROID_RADIUS 20.0f
 # define GRAVITYPULL_SCALE 0.000006f
 # define DIRECTION_CIRCLE_SIZE_TIMES_PLANET 6
+# define SHIELD_RED_TIME 0.5f
 
+<<<<<<< HEAD
 # define TEMP_CHANGE 7
+=======
+# define TEMP_CHANGE 10
+>>>>>>> d4661c5943550ace13cfd799b6351fba4cc3f558
 # define MAX_TEMP 255
 # define MIN_TEMP -255
 
@@ -46,13 +51,18 @@ typedef struct sprite
     Vector2     center_pos;
     bool        is_inside_screen;
 	float       speed;
+    float       rotation;
 } sprite_t;
 
 typedef struct shield {
     sprite_t    sprite;
+    Texture2D   red_shield_texture;
+    Texture2D   shield_texture;
     float       angle;
     int         direction;
 	float		spin_speed;
+    bool        shieldWasHit;
+    double      lastShieldHitTime;
 } shield_t;
 
 typedef struct shadow {
@@ -74,6 +84,8 @@ typedef struct sound
 {
     Sound       shield;
     Sound       theme;
+	Sound		asteroid;
+	Sound		earth;
 } sound_t;
 
 
@@ -95,6 +107,7 @@ typedef struct game
     int current_health;
     state_t state;
     losestate_t lose_reason;
+    // Texture2D   lose_textures[3];
     float       time_since_death;
 } game_t;
 
@@ -124,7 +137,9 @@ void check_colliding_asteroids();
 void initialize_out_of_bounds_asteroids();
 void update_planet_condition(float delta_time, float shieldAngle);
 void play_shield_sound();
+void play_earth_collision();
+void play_asteroid_collision();
 void draw_red_shield(float delta_time);
 void draw_repeat_background(int	screen_width, int screen_height);
 
-#endif
+char *ft_strjoin(char const *s1, char const *s2);
