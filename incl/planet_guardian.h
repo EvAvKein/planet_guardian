@@ -12,14 +12,15 @@
 
 # define MAX_HEALTH 5
 
-# define MAX_ASTEROIDS 15
-# define MAX_ASTEROID_SPEED 10.0f
-# define MIN_ASTEROID_RADIUS 10.0f
-# define MAX_ASTEROID_RADIUS 20.0f
-# define GRAVITYPULL_SCALE 0.000006f
-# define DIRECTION_CIRCLE_SIZE_TIMES_PLANET 6
+# define MAX_ASTEROIDS 12
+# define MIN_ASTEROID_SPEED 2
+# define MAX_ASTEROID_SPEED 18
+# define MIN_ASTEROID_RADIUS 4
+# define MAX_ASTEROID_RADIUS 8
+# define GRAVITYPULL_SCALE 0.0000034f
+# define DIRECTION_CIRCLE_SIZE_TIMES_PLANET 12
 
-# define TEMP_CHANGE 7 
+# define TEMP_CHANGE 10 
 # define MAX_TEMP 255
 # define MIN_TEMP -255
 
@@ -52,7 +53,7 @@ typedef struct shield {
     sprite_t    sprite;
     float       angle;
     int         direction;
-	float		spin_speed;
+    float	spin_speed;
 } shield_t;
 
 typedef struct shadow {
