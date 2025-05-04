@@ -12,8 +12,26 @@ void drawMenu() {
 
 void deathScreen() {
     BeginDrawing();
-    printp("YOU LOST.\n RETRY?", 400, 400, 1.0f, DARKPURPLE);
-    if(IsKeyPressed(KEY_SPACE))
+    DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(BLACK, 0.7f));
+        const char* gameOverText = "GAME OVER";
+        Vector2 textSize = MeasureTextEx(game.font, gameOverText, game.font.baseSize * 2.0f, 2.0f);
+    DrawTextEx(game.font, gameOverText,
+        (Vector2){(GetScreenWidth() - textSize.x) / 2.0f, (GetScreenHeight() - textSize.y) / 2.0f - 30},
+        game.font.baseSize * 2.0f, 2.0f, RED);
+
+    const char* restartText = "Press [SPACE] to Restart";
+    Vector2 restartTextSize = MeasureTextEx(game.font, restartText, game.font.baseSize, 1.0f);
+    DrawTextEx(game.font, restartText,
+        (Vector2){(GetScreenWidth() - restartTextSize.x) / 2.0f, (GetScreenHeight() - restartTextSize.y) / 2.0f + 40},
+        game.font.baseSize, 1.0f, WHITE);
+
+    game.time_since_death += GetFrameTime();
+    if (game.time_since_death > 1.0f && IsKeyPressed(KEY_SPACE)) {
+        initialize_all_asteroids();
+        game.current_health = MAX_HEALTH;
+        game.shield.angle = 0.0f;
         game.state = GAME;
+        game.temp.value = 0;
+    }
     EndDrawing();
 }

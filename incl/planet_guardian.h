@@ -10,13 +10,13 @@
 # define SCREEN_WIDTH 1000
 # define SCREEN_HEIGHT 1000
 
-# define MAX_HEALTH 20
+# define MAX_HEALTH 5
 
-# define MAX_ASTEROIDS 1
-# define MAX_ASTEROID_SPEED 5.0f
+# define MAX_ASTEROIDS 5
+# define MAX_ASTEROID_SPEED 3.0f
 # define MIN_ASTEROID_RADIUS 10.0f
 # define MAX_ASTEROID_RADIUS 20.0f
-# define GRAVITYPULL_SCALE 0.000005f
+# define GRAVITYPULL_SCALE 0.0001f
 
 # define TEMP_CHANGE 10 
 # define MAX_TEMP 255
@@ -80,10 +80,11 @@ typedef struct game
     Texture2D   logo;
     Texture2D   menu;
     char   *asteroid_textures[4];
-	int max_health;
+    int max_health;
     int current_health;
     state_t state;
     losestate_t lose_reason;
+    float       time_since_death;
 } game_t;
 
 extern game_t game;
