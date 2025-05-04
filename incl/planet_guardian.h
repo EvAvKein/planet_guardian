@@ -18,7 +18,7 @@
 
 # define TEMP_CHANGE 10 
 # define MAX_TEMP 255
-# define MIN_TEMP 0
+# define MIN_TEMP -255
 
 typedef enum gamestate 
 {
@@ -51,21 +51,21 @@ typedef struct shadow {
     float       interval;
 } shadow_t;
 
-typedef struct cold {
-    Texture2D       texture;
-    unsigned char   value;
-    float           elapsed;
-    float           interval;
-    // float withdrawal_limit;
-    // float withdrawal_current;
-} cold_t;
+typedef struct temp {
+    Texture2D   hot_texture;
+    Texture2D   cold_texture;
+    int         value;
+    float       elapsed;
+    float       interval;
+} temp_t;
 
 typedef struct game
 {
+    unsigned int health;
     sprite_t   planet;
     shield_t   shield;
     sprite_t   asteroid[MAX_ASTEROIDS];
-    cold_t     cold;
+    temp_t     temp;
     shadow_t   shadow;
     Texture2D  background;
     Font        font;
