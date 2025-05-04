@@ -22,7 +22,9 @@ void check_colliding_asteroids()
 		{
 			if (check_collision(game.asteroid[i], game.asteroid[j]))
 			{
-				play_asteroid_collision();
+				if (game.asteroid[i].is_inside_screen
+					&& game.asteroid[j].is_inside_screen)
+					play_asteroid_collision();
 				game.asteroid[i] = initialize_asteroid(game.asteroid[i]);
 				game.asteroid[j] = initialize_asteroid(game.asteroid[j]);
 			}
