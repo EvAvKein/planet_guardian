@@ -13,11 +13,25 @@ void drawMenu() {
 void deathScreen() {
     BeginDrawing();
     DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(BLACK, 0.7f));
-        const char* gameOverText = "GAME OVER";
+        const char *gameOverText = ft_strjoin("LOST TO ", 
+            game.lose_reason == HEAT ? "HEAT"
+            : game.lose_reason == COLD ? "COLDNESS"
+            : "METEORS");
+        if (!gameOverText)
+        {
+            dprintf(2, "Malloc failed in ft_strjoin :( \n");
+            return ;
+        }
         Vector2 textSize = MeasureTextEx(game.font, gameOverText, game.font.baseSize * 2.0f, 2.0f);
     DrawTextEx(game.font, gameOverText,
         (Vector2){(GetScreenWidth() - textSize.x) / 2.0f, (GetScreenHeight() - textSize.y) / 2.0f - 30},
         game.font.baseSize * 2.0f, 2.0f, RED);
+
+    // Texture2D lose_asset = game.lose_textures[game.lose_reason];
+    // DrawTexture(lose_asset,
+    //     GetScreenWidth() / 2 - (lose_asset.width / 2),
+    //     GetScreenHeight() / 4 - (lose_asset.height / 2) - 10,
+    //     WHITE);
 
     const char* restartText = "Press [SPACE] to Restart";
     Vector2 restartTextSize = MeasureTextEx(game.font, restartText, game.font.baseSize, 1.0f);
