@@ -37,6 +37,11 @@ void gameplay_frame()
 	// int asteroid1;
 	// int asteroid2;
 	int i = 0;
+	if (game.shield.shieldWasHit && (GetTime() - game.shield.lastShieldHitTime > SHIELD_RED_TIME))
+	{
+		game.shield.sprite.texture = game.shield.shield_texture;
+		game.shield.shieldWasHit = false;
+	}
 	while (i < MAX_ASTEROIDS)
 	{
 		game.asteroid[i].center_pos.x = game.asteroid[i].pos.x + game.asteroid[i].radius;
@@ -51,6 +56,7 @@ void gameplay_frame()
 				return ;
 			};
 			game.asteroid[i] = initialize_asteroid(game.asteroid[i]);
+			play_earth_collision();
 		}
 		game.asteroid[i].pos = moveTowardsWithGravity(game.asteroid[i].pos, game.asteroid[i].direction, game.asteroid[i].speed, game.planet.center_pos);
 
@@ -63,6 +69,9 @@ void gameplay_frame()
 		{
 				play_shield_sound();
 				game.asteroid[i] = initialize_asteroid(game.asteroid[i]);
+				game.shield.sprite.texture = game.shield.red_shield_texture;
+				game.shield.lastShieldHitTime = GetTime();
+				game.shield.shieldWasHit = true;
 		}
 		i++;
 	}
@@ -111,7 +120,12 @@ void gameplay_frame()
             if (currentHealthBarWidth < 0) currentHealthBarWidth = 0;
 
             DrawRectangleV(healthBarPos, (Vector2){healthBarWidthMax, healthBarHeight}, DARKGRAY);
-            DrawRectangleV(healthBarPos, (Vector2){currentHealthBarWidth, healthBarHeight}, GREEN);
+            if ((float)(game.current_health / (float)MAX_HEALTH) > 0.7)
+				DrawRectangleV(healthBarPos, (Vector2){currentHealthBarWidth, healthBarHeight}, GREEN);
+			else if ((float)(game.current_health / (float)MAX_HEALTH) > 0.3)
+				DrawRectangleV(healthBarPos, (Vector2){currentHealthBarWidth, healthBarHeight}, YELLOW);
+			else if ((float)(game.current_health / (float)MAX_HEALTH) > -1.0)
+				DrawRectangleV(healthBarPos, (Vector2){currentHealthBarWidth, healthBarHeight}, RED);
             DrawRectangleLinesEx((Rectangle){healthBarPos.x, healthBarPos.y, healthBarWidthMax, healthBarHeight}, 2.0f, BLACK);
 
 		DrawTextureV(game.planet.texture, game.planet.pos, WHITE);

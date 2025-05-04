@@ -12,26 +12,29 @@
 
 # define MAX_HEALTH 5
 
-# define MAX_ASTEROIDS 12
-# define MIN_ASTEROID_SPEED 2
-# define MAX_ASTEROID_SPEED 18
-# define MIN_ASTEROID_RADIUS 4
+# define MAX_ASTEROIDS 15
+# define MIN_ASTEROID_SPEED 70
+# define MAX_ASTEROID_SPEED 230
+# define MIN_ASTEROID_RADIUS 5
 # define MAX_ASTEROID_RADIUS 8
-# define GRAVITYPULL_SCALE 0.0000034f
-# define DIRECTION_CIRCLE_SIZE_TIMES_PLANET 12
+# define GRAVITYPULL_SCALE 0.0000033f
+# define DIRECTION_CIRCLE_SIZE_TIMES_PLANET 10
 
 # define TEMP_CHANGE 10 
+# define SHIELD_RED_TIME 0.2f
+
+# define TEMP_CHANGE 10
 # define MAX_TEMP 255
 # define MIN_TEMP -255
 
-typedef enum gamestate 
+typedef enum gamestate
 {
     START,
     GAME,
     END
 } state_t;
 
-typedef enum losestate 
+typedef enum losestate
 {
     METEORS,
     HEAT,
@@ -47,13 +50,18 @@ typedef struct sprite
     Vector2     center_pos;
     bool        is_inside_screen;
 	float       speed;
+    float       rotation;
 } sprite_t;
 
 typedef struct shield {
     sprite_t    sprite;
+    Texture2D   red_shield_texture;
+    Texture2D   shield_texture;
     float       angle;
     int         direction;
     float	spin_speed;
+    bool        shieldWasHit;
+    double      lastShieldHitTime;
 } shield_t;
 
 typedef struct shadow {
@@ -71,8 +79,19 @@ typedef struct temp {
     float       interval;
 } temp_t;
 
+typedef struct sound
+{
+    Sound       shield;
+    Sound       theme;
+	Sound		asteroid;
+	Sound		earth;
+} sound_t;
+
+
 typedef struct game
 {
+    unsigned int health;
+    sound_t    sound;
     sprite_t   planet;
     shield_t   shield;
     sprite_t   asteroid[MAX_ASTEROIDS];
@@ -87,6 +106,7 @@ typedef struct game
     int current_health;
     state_t state;
     losestate_t lose_reason;
+    // Texture2D   lose_textures[3];
     float       time_since_death;
 } game_t;
 
@@ -97,8 +117,10 @@ void gameplay_frame();
 void textureLoader();
 void textureUnload();
 
+void playTheme();
 void drawMenu();
 void deathScreen();
+void soundLoader();
 void printp(char *msg, float x, float y, float size, Color color);
 Vector2 moveTowardsWithGravity(Vector2 current, Vector2 direction, int speed, Vector2 planetCenter);
 Vector2 generateAsteroidPos();
@@ -114,7 +136,11 @@ void check_colliding_asteroids();
 void initialize_out_of_bounds_asteroids();
 void update_planet_condition(float delta_time, float shieldAngle);
 void play_shield_sound();
+void play_earth_collision();
+void play_asteroid_collision();
 void draw_red_shield(float delta_time);
 void draw_repeat_background(int	screen_width, int screen_height);
+
+char *ft_strjoin(char const *s1, char const *s2);
 
 #endif
