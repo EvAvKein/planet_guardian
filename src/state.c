@@ -29,6 +29,7 @@ void deathScreen() {
 
     game.time_since_death += GetFrameTime();
     if (game.time_since_death > 1.0f && IsKeyPressed(KEY_SPACE)) {
+        PlaySound(game.sound.theme);
         initialize_all_asteroids();
         game.current_health = MAX_HEALTH;
         game.shield.angle = 0.0f;
