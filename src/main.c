@@ -33,7 +33,6 @@ int main(void)
 	InitAudioDevice();
 	while (!WindowShouldClose())
 	{
-		BeginDrawing();
 			switch(game.state) {
 				case START:
 					drawMenu();
@@ -44,7 +43,6 @@ int main(void)
 				case END:
 					deathScreen();
 			}
-		EndDrawing();
 	}
 	textureUnload();
 
