@@ -128,6 +128,5 @@ void gameplay_frame()
 			(Color){.r = 0, .g = 0, .b = 0, .a = 150});
 		draw_shield(game.shield.angle);
 		draw_asteroids();
-		printp("HEALTH: 3", 550., 750., 1.0f, RED);
 	EndDrawing();
 }
