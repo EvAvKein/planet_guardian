@@ -26,7 +26,7 @@ void deathScreen() {
         game.font.baseSize, 1.0f, WHITE);
     if (IsKeyPressed(KEY_SPACE)) {
         initialize_all_asteroids();
-        game.current_health = game.max_health;
+        game.current_health = MAX_HEALTH;
         game.shield.angle = 0.0f;
         game.state = GAME;
     }
