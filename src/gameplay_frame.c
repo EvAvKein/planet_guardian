@@ -43,8 +43,12 @@ void gameplay_frame()
 		game.asteroid[i].center_pos.y = game.asteroid[i].pos.y + game.asteroid[i].radius;
 		if (CheckCollisionCircles(game.planet.center_pos, game.planet.radius, game.asteroid[i].center_pos, game.asteroid[i].radius))
 		{
-			if (!--game.health)
-				printf("lOST\n");
+			if (game.current_health > 0) {
+                game.current_health--;;
+			}
+            if (game.current_health <= 0) {
+                game.state = END;
+            }
 			game.asteroid[i] = initialize_asteroid(game.asteroid[i]);
 		}
 		game.asteroid[i].pos = moveTowardsWithGravity(game.asteroid[i].pos, game.asteroid[i].direction, game.asteroid[i].speed, game.planet.center_pos);
@@ -98,14 +102,6 @@ void gameplay_frame()
 			game.shadow.rotation,
 			(Color){.r = 0, .g = 0, .b = 0, .a = 150});
 		draw_shield(game.shield.angle);
-		// printf("%f\n", remainder(shieldAngle, 3.6));
-		//debugging shield
-		// DrawCircleLinesV(shieldCircle1Center, game.shield.texture.width * 0.093f, BLACK);
-		// DrawCircleLinesV(shieldCircle2Center, game.shield.texture.width * 0.093f, BLACK);
-		// DrawCircleLinesV(shieldCircle3Center, game.shield.texture.width * 0.15f, BLACK);
-		// DrawCircleLinesV(shieldCircle4Center, game.shield.texture.width * 0.15f, BLACK);
-		// DrawCircleLinesV(shieldCircle5Center, game.shield.texture.width * 0.12f, BLACK);
-		// DrawCircleLinesV(shieldCircle6Center, game.shield.texture.width * 0.12f, BLACK);
 		draw_asteroids();
 		printp("HEALTH: 3", 550., 750., 1.0f, RED);
 	EndDrawing();
