@@ -30,6 +30,9 @@ void textureLoader()
 	game.asteroid_textures[1] = "assets/graphics/asteroid2.png";
 	game.asteroid_textures[2] = "assets/graphics/asteroid3.png";
 	game.asteroid_textures[3] = "assets/graphics/asteroid4.png";
+	// game.lose_textures[METEORS] = LoadTexture("assets/graphics/earth_snow_broken.png");
+	// game.lose_textures[HEAT] = LoadTexture("assets/graphics/earth_snow_broken.png");
+	// game.lose_textures[COLD] = LoadTexture("assets/graphics/earth_snow_broken.png");
 	// asteroid_assets[0] = "assets/graphics/asteroid.png";	
 	// asteroid_assets[1] = "assets/graphics/asteroid2.png";	
 	// asteroid_assets[2] = "assets/graphics/asteroid3.png";	

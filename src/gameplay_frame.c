@@ -119,7 +119,12 @@ void gameplay_frame()
             if (currentHealthBarWidth < 0) currentHealthBarWidth = 0;
 
             DrawRectangleV(healthBarPos, (Vector2){healthBarWidthMax, healthBarHeight}, DARKGRAY);
-            DrawRectangleV(healthBarPos, (Vector2){currentHealthBarWidth, healthBarHeight}, GREEN);
+            if ((float)(game.current_health / (float)MAX_HEALTH) > 0.7)
+				DrawRectangleV(healthBarPos, (Vector2){currentHealthBarWidth, healthBarHeight}, GREEN);
+			else if ((float)(game.current_health / (float)MAX_HEALTH) > 0.3)
+				DrawRectangleV(healthBarPos, (Vector2){currentHealthBarWidth, healthBarHeight}, YELLOW);
+			else if ((float)(game.current_health / (float)MAX_HEALTH) > -1.0)
+				DrawRectangleV(healthBarPos, (Vector2){currentHealthBarWidth, healthBarHeight}, RED);
             DrawRectangleLinesEx((Rectangle){healthBarPos.x, healthBarPos.y, healthBarWidthMax, healthBarHeight}, 2.0f, BLACK);
 
 		DrawTextureV(game.planet.texture, game.planet.pos, WHITE);
