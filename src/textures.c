@@ -41,6 +41,7 @@ void textureUnload()
 	while (i < MAX_ASTEROIDS)
 	{
 		UnloadTexture(game.asteroid[i].texture);
+		++i;
 	}
 	UnloadTexture(game.shield.sprite.texture);
 	
