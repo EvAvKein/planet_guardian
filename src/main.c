@@ -8,7 +8,7 @@ void initialize_game()
 	
 	game.shield.angle = 0.0f;
 	game.shield.direction = 1;
-	game.shield.spin_speed = 3.0f;
+	game.shield.spin_speed = 2.5f;
 	game.temp.interval = 0.15f;
 	game.shadow.interval = 0.15f;
 	game.time_since_live = GetFrameTime();

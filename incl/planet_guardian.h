@@ -13,12 +13,15 @@
 # define MAX_HEALTH 5
 
 # define MAX_ASTEROIDS 15
-# define MAX_ASTEROID_SPEED 10.0f
-# define MIN_ASTEROID_RADIUS 10.0f
-# define MAX_ASTEROID_RADIUS 20.0f
-# define GRAVITYPULL_SCALE 0.000006f
-# define DIRECTION_CIRCLE_SIZE_TIMES_PLANET 6
-# define SHIELD_RED_TIME 0.5f
+# define MIN_ASTEROID_SPEED 70
+# define MAX_ASTEROID_SPEED 230
+# define MIN_ASTEROID_RADIUS 5
+# define MAX_ASTEROID_RADIUS 8
+# define GRAVITYPULL_SCALE 0.0000033f
+# define DIRECTION_CIRCLE_SIZE_TIMES_PLANET 10
+
+# define TEMP_CHANGE 10 
+# define SHIELD_RED_TIME 0.2f
 
 
 # define TEMP_CHANGE 10
@@ -57,7 +60,7 @@ typedef struct shield {
     Texture2D   shield_texture;
     float       angle;
     int         direction;
-	float		spin_speed;
+    float	spin_speed;
     bool        shieldWasHit;
     double      lastShieldHitTime;
 } shield_t;
