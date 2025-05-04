@@ -79,7 +79,7 @@ typedef struct temp {
 typedef struct sound
 {
     Sound       shield;
-    Sound       theme;
+    Music       theme;
 	Sound		asteroid;
 	Sound		earth;
 } sound_t;
@@ -115,6 +115,7 @@ void gameplay_frame();
 void textureLoader();
 void textureUnload();
 
+void stopTheme();
 void playTheme();
 void drawMenu();
 void deathScreen();
