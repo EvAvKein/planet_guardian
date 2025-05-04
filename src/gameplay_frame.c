@@ -37,7 +37,7 @@ void gameplay_frame()
 	// int asteroid1;
 	// int asteroid2;
 	int i = 0;
-	if (game.shield.shieldWasHit && (GetTime() - game.shield.lastShieldHitTime > 0.5))
+	if (game.shield.shieldWasHit && (GetTime() - game.shield.lastShieldHitTime > SHIELD_RED_TIME))
 	{
 		game.shield.sprite.texture = game.shield.shield_texture;
 		game.shield.shieldWasHit = false;
