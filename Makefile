@@ -11,6 +11,7 @@ SRC_FILES := main.c \
 			 draw_shield.c \
 			 planet_condition.c \
 			 text.c \
+			 sounds.c \
 			 state.c
 INCLUDE_DIR := incl
 

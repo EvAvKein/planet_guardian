@@ -39,12 +39,12 @@ void textureLoader()
 void textureUnload()
 {
 	UnloadTexture(game.planet.texture);
+	int i = 0;
+	while (i < MAX_ASTEROIDS)
+	{
+		UnloadTexture(game.asteroid[i].texture);
+	}
 	UnloadTexture(game.temp.hot_texture);
 	UnloadTexture(game.temp.cold_texture);
-	UnloadTexture(game.asteroid[0].texture);
-	UnloadTexture(game.asteroid[1].texture);
-	UnloadTexture(game.asteroid[2].texture);
-	UnloadTexture(game.asteroid[3].texture);
-	UnloadTexture(game.asteroid[4].texture);
 	UnloadTexture(game.shield.sprite.texture);
 }

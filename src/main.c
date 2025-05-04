@@ -30,9 +30,9 @@ int main(void)
 
 	initialize_game();	
 	initialize_all_asteroids();
+	InitAudioDevice();
 	while (!WindowShouldClose())
 	{
-		BeginDrawing();
 			switch(game.state) {
 				case START:
 					drawMenu();
@@ -43,7 +43,6 @@ int main(void)
 				case END:
 					deathScreen();
 			}
-		EndDrawing();
 	}
 	textureUnload();
 

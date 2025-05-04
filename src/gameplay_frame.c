@@ -47,7 +47,7 @@ void gameplay_frame()
 				printf("lOST\n");
 			game.asteroid[i] = initialize_asteroid(game.asteroid[i]);
 		}
-		game.asteroid[i].pos = moveTowardsWithGravity(game.asteroid[i].pos, game.planet.center_pos, game.asteroid[i].speed, game.planet.center_pos);
+		game.asteroid[i].pos = moveTowardsWithGravity(game.asteroid[i].pos, game.asteroid[i].direction, game.asteroid[i].speed, game.planet.center_pos);
 
 		if (CheckCollisionCircles(game.asteroid[i].center_pos, game.asteroid[i].radius, shieldCircle1Center, shieldSegmentRadius) ||
 		CheckCollisionCircles(game.asteroid[i].center_pos, game.asteroid[i].radius, shieldCircle2Center, shieldSegmentRadius) ||
@@ -56,6 +56,7 @@ void gameplay_frame()
 		CheckCollisionCircles(game.asteroid[i].center_pos, game.asteroid[i].radius, shieldCircle5Center, shieldSegmentRadius)||
 		CheckCollisionCircles(game.asteroid[i].center_pos, game.asteroid[i].radius, shieldCircle6Center, shieldSegmentRadius))
 		{
+				play_shield_sound();
 				game.asteroid[i] = initialize_asteroid(game.asteroid[i]);
 		}
 		i++;
