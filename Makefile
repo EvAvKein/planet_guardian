@@ -18,6 +18,7 @@ INCLUDE_DIR := incl
 LIB_FILES := raylib5_6.a
 LIB_INCLUDE_DIR := raylib/src
 
+CC := clang
 COMPILE_FLAGS := -Wall -Wextra -Werror -I$(INCLUDE_DIR) -I$(LIB_INCLUDE_DIR)
 LIBRARY_FLAGS := -lm -ldl -lpthread -lGL -lrt -lX11
 DEBUG_FLAGS := -g
@@ -27,10 +28,10 @@ SRC_OBJ := $(SRC_FILES:%.c=$(SRC_DIR)/%.o)
 all: $(NAME)
 
 %.o: %.c
-	cc $(COMPILE_FLAGS) -c $< -o $@
+	$(CC) $(COMPILE_FLAGS) -c $< -o $@
 
 $(NAME): $(LIB_FILES) $(SRC_OBJ)
-	clang $(SRC_OBJ) $(LIB_FILES) $(COMPILE_FLAGS) $(LIBRARY_FLAGS) -o $(NAME)
+	$(CC) $(SRC_OBJ) $(LIB_FILES) $(COMPILE_FLAGS) $(LIBRARY_FLAGS) -o $(NAME)
 
 clean:
 	@rm -f $(SRC_OBJ)
