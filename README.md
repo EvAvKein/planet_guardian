@@ -2,6 +2,8 @@
 
 *Created in 48 hours at Hive Helsinki's May 2025 Game Jam!*
 
+https://github.com/user-attachments/assets/a0aef364-6596-4062-8dc6-1d9915fcc2c1
+
 ---
 
 ## 🎮 About the Game
