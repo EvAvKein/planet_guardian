@@ -47,7 +47,7 @@ The only currently and forever supported OS is linux!
 - Planet temperatures, shadow, and death-states
 
 #### [Oskari](https://github.com/omartela)
-- Meteor physics, gravity, and rotiation
+- Meteor physics, gravity, and rotation
 - Shield hit indicator
 
 #### [Max](https://github.com/oliynykmax)
